@@ -16,7 +16,7 @@ public class DaoNomina {
     ResultSet rs;
     
     public boolean insertar(nomina no){
-        String sql="insert into nomina (fecha,ctrabajo,total,idempleado,idcargo) values (?,?,?,?,?)";
+        String sql="insert into nomina (fecha,ctrabajo,total,idempleado,idcargo,estado) values (?,?,?,?,?,?)";
         try{
             con=cn.conectar();
             ps=con.prepareStatement(sql);
@@ -25,6 +25,7 @@ public class DaoNomina {
             ps.setDouble(3, no.getTotal());
             ps.setInt(4, no.getIdempleado());
             ps.setInt(5, no.getIdcargo());
+            ps.setString(6, no.getEstado());
             int n=ps.executeUpdate();
             if(n!=0){
                 return true;

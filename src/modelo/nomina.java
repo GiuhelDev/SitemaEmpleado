@@ -11,18 +11,22 @@ public class nomina {
     double total;
     int idempleado;
     int idcargo;
+    String estado;
 
     public nomina() {
     }
 
-    public nomina(int id, Date fecha, int ctrabajo, double total, int idempleado, int idcargo) {
+    public nomina(int id, Date fecha, int ctrabajo, double total, int idempleado, int idcargo, String estado) {
         this.id = id;
         this.fecha = fecha;
         this.ctrabajo = ctrabajo;
         this.total = total;
         this.idempleado = idempleado;
         this.idcargo = idcargo;
+        this.estado = estado;
     }
+
+   
 
     public int getId() {
         return id;
@@ -70,6 +74,14 @@ public class nomina {
 
     public void setIdcargo(int idcargo) {
         this.idcargo = idcargo;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
     
     

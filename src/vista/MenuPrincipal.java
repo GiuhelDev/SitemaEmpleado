@@ -7,6 +7,7 @@ import Dao.DaoArea;
 import Dao.DaoCargo;
 import Dao.DaoEmpleado;
 import Dao.DaoNomina;
+import Dao.DaoPago;
 
 import com.formdev.flatlaf.intellijthemes.FlatArcOrangeIJTheme;
 import java.sql.Date;
@@ -18,6 +19,7 @@ import modelo.areas;
 import modelo.cargo;
 import modelo.empleado;
 import modelo.nomina;
+import modelo.pago;
 
 
 /**
@@ -41,6 +43,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
     nomina no=new nomina();
     DaoNomina daoN=new DaoNomina();
     DefaultTableModel modeloNomina=new DefaultTableModel();
+    
+    pago pa=new pago();
+    DaoPago daoP=new DaoPago();
+    DefaultTableModel modeloPago=new DefaultTableModel();
     /**
      * Creates new form MenuPrincipal
      */
@@ -1208,20 +1214,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jLabel30)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtidpago, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel29)
                             .addComponent(jLabel28))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txttotalPago)
-                            .addComponent(txtidnominap))))
-                .addContainerGap(25, Short.MAX_VALUE))
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txttotalPago, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                            .addComponent(txtidnominap)))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(jLabel30)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtidpago, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1254,9 +1260,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jLabel35.setText("Cargo:");
 
+        txtcargop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtcargopActionPerformed(evt);
+            }
+        });
+
         jLabel38.setText("Doc:");
 
         btnbuscarep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buscar.png"))); // NOI18N
+        btnbuscarep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbuscarepActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -1266,31 +1283,34 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addComponent(txtdocumentop, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnbuscarep, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel38)
+                        .addComponent(jLabel34)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtidcargop))
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addComponent(jLabel35)
+                        .addGap(28, 28, 28)
+                        .addComponent(txtcargop))
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel31)
                             .addComponent(jLabel32)
                             .addComponent(jLabel33))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtapellidop, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtempleadop, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(txtidempleadop, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(txtapellidop, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel11Layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtempleadop, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                                    .addComponent(txtidempleadop)
+                                    .addComponent(txtdocumentop, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addComponent(jLabel34)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtidcargop, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addComponent(jLabel35)
-                        .addGap(28, 28, 28)
-                        .addComponent(txtcargop, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(11, Short.MAX_VALUE))
+                        .addComponent(jLabel38)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnbuscarep, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1342,12 +1362,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel36)
                     .addComponent(jLabel37))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
-                .addContainerGap(81, Short.MAX_VALUE)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap(78, Short.MAX_VALUE)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(fecha2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fecha1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21))
+                    .addComponent(fecha2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1368,6 +1388,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         btnregistrarPago.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/guardar.png"))); // NOI18N
         btnregistrarPago.setText("Registrar");
+        btnregistrarPago.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnregistrarPagoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -1417,19 +1442,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(33, 33, 33)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         panel.addTab("Pagos", jPanel9);
@@ -1773,6 +1800,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         no.setTotal(Double.parseDouble(txttotal.getText()));
         no.setIdempleado(Integer.parseInt(txtidempleadoN.getText()));
         no.setIdcargo(Integer.parseInt(txtidcargoN.getText()));
+        no.setEstado("pendiente");
         if(daoN.insertar(no)){
             JOptionPane.showMessageDialog(null, "Nomina registrada con exito");
             limpiarDatosNomina();
@@ -1896,6 +1924,58 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnEliminarNominaActionPerformed
+
+    private void btnregistrarPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregistrarPagoActionPerformed
+        // TODO add your handling code here:
+        Calendar cal;
+        int d,m,a;
+        cal=fecha1.getCalendar();
+        d=cal.get(Calendar.DAY_OF_MONTH);
+        m=cal.get(Calendar.MONTH);
+        a=cal.get(Calendar.YEAR)-1900;
+        pa.setFecha1(new Date(a,m,d));
+        
+        Calendar cal1;
+        int d1,m1,a1;
+        cal1=fecha2.getCalendar();
+        d1=cal.get(Calendar.DAY_OF_MONTH);
+        m1=cal.get(Calendar.MONTH);
+        a1=cal.get(Calendar.YEAR)-1900;
+        pa.setFecha2(new Date(a1,m1,d1));
+        
+        pa.setIdempleado(Integer.parseInt(txtidempleadop.getText()));
+        pa.setTotal(Double.parseDouble(txttotalPago.getText()));
+        
+        if(daoP.insertar(pa)){
+            JOptionPane.showMessageDialog(null, "Pago registrado con exito");
+            //limpiarDatosNomina();
+            //limpiarTablaNomina();
+            //listarNomina();
+        }else{
+            JOptionPane.showMessageDialog(null, "Error Al Registrar el pago");
+        }
+    }//GEN-LAST:event_btnregistrarPagoActionPerformed
+
+    private void btnbuscarepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarepActionPerformed
+        // TODO add your handling code here:
+        em.setDoc(txtdocumentop.getText());
+        if(daoE.BuscarEmpleadoN(em)){
+            txtidempleadop.setText(em.getId()+"");
+            txtempleadop.setText(em.getNombre());
+            txtapellidop.setText(em.getApellido());
+            txtidcargop.setText(em.getIdcargo()+"");
+            cr.setId(Integer.parseInt(txtidcargop.getText()));
+            daoC.Buscar(cr);
+            txtcargop.setText(cr.getNombre());
+        }else{
+            JOptionPane.showMessageDialog(null, "El Empleado No Existe");
+            //limpiarDatosEmpleado();
+        }
+    }//GEN-LAST:event_btnbuscarepActionPerformed
+
+    private void txtcargopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcargopActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtcargopActionPerformed
 
     void limpiarDatosCargo(){
         txtidcargo.setText("");
