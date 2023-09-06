@@ -11,6 +11,7 @@ import Dao.DaoPago;
 
 import com.formdev.flatlaf.intellijthemes.FlatArcOrangeIJTheme;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -223,6 +224,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         txtidpago = new javax.swing.JTextField();
         txttotalPago = new javax.swing.JTextField();
         txtidnominap = new javax.swing.JTextField();
+        btnCalcularPago = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
@@ -1208,6 +1210,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jLabel30.setText("IDPago:");
 
+        btnCalcularPago.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/calcular.png"))); // NOI18N
+        btnCalcularPago.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalcularPagoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
@@ -1228,6 +1237,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtidpago, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(12, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCalcularPago)
+                .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1244,7 +1257,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel28)
                     .addComponent(txtidnominap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnCalcularPago)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
@@ -1380,7 +1395,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel37)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fecha2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         jPanel13.setBackground(new java.awt.Color(255, 255, 255));
@@ -1442,21 +1457,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(33, 33, 33)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel9Layout.createSequentialGroup()
+                            .addGap(23, 23, 23)
+                            .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(40, 40, 40)))
+                    .addComponent(jPanel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         panel.addTab("Pagos", jPanel9);
@@ -1954,6 +1966,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(null, "Error Al Registrar el pago");
         }
+        int ide;
+        String f1,f2;
+        
+        ide=Integer.parseInt(txtidempleadop.getText());
+        f1=new SimpleDateFormat("yyyy-MM-dd").format(fecha1.getDate());
+        f2=new SimpleDateFormat("yyyy-MM-dd").format(fecha2.getDate()); 
+        if(daoP.editar(ide, f1, f2)){
+            //limpiarDatosNomina();
+            //limpiarTablaNomina();
+            //listarNomina();
+        }else{
+            JOptionPane.showMessageDialog(null, "Error editar de pendiente a pagado");
+        }
     }//GEN-LAST:event_btnregistrarPagoActionPerformed
 
     private void btnbuscarepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarepActionPerformed
@@ -1976,6 +2001,23 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void txtcargopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcargopActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtcargopActionPerformed
+
+    private void btnCalcularPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularPagoActionPerformed
+        // TODO add your handling code here:
+        int ide;
+        String f1,f2;
+        
+        ide=Integer.parseInt(txtidempleadop.getText());
+        f1=new SimpleDateFormat("yyyy-MM-dd").format(fecha1.getDate());
+        f2=new SimpleDateFormat("yyyy-MM-dd").format(fecha2.getDate()); 
+        
+        pa=daoP.Total(ide, f1, f2);
+        if(pa.getTotal()!=0.0){
+            txttotalPago.setText(pa.getTotal()+"");
+        }else{
+            JOptionPane.showMessageDialog(null, "Error al Calcular");
+        }
+    }//GEN-LAST:event_btnCalcularPagoActionPerformed
 
     void limpiarDatosCargo(){
         txtidcargo.setText("");
@@ -2070,6 +2112,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscarEmpleado;
     private javax.swing.JButton btnBuscarNomina;
     private javax.swing.JButton btnCalcular;
+    private javax.swing.JButton btnCalcularPago;
     private javax.swing.JButton btnCargo;
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnEditar;
