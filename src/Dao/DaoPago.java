@@ -2,11 +2,10 @@
 package Dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
-import modelo.nomina;
+import javax.swing.table.DefaultTableModel;
 import modelo.pago;
 
 
@@ -69,4 +68,44 @@ public class DaoPago {
             return false;
         }
    }
+    
+    public DefaultTableModel listar(){
+        DefaultTableModel modelo;
+        
+        String [] titulos={"ID Pago","IDEMPLEADO","Nombre","Apellido","Documento",
+            "IDCargo","Cargo","fecha1","fecha2","Total"};
+        
+        String [] registros=new String[10];
+        modelo=new DefaultTableModel(null,titulos);
+        
+        String sql="SELECT p.id,p.idempleado,e.nombre,e.apellido,e.documento,\n" +
+                    "e.id_cargo,c.nom_cargo,p.fecha1,p.fecha2,p.total FROM pagos p \n" +
+                    "INNER JOIN empleados e \n" +
+                    "on e.id_empleado=p.idempleado\n" +
+                    "INNER JOIN cargos c \n" +
+                    "ON c.id_cargo=e.id_cargo";
+        
+        try{
+            con=cn.conectar();
+            ps=con.prepareStatement(sql);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                registros[0]=rs.getString("id");
+                registros[1]=rs.getString("idempleado");
+                registros[2]=rs.getString("nombre");
+                registros[3]=rs.getString("apellido");
+                registros[4]=rs.getString("documento");
+                registros[5]=rs.getString("id_cargo");
+                registros[6]=rs.getString("nom_cargo");
+                registros[7]=rs.getString("fecha1");
+                registros[8]=rs.getString("fecha2");
+                registros[9]=rs.getString("total");
+                modelo.addRow(registros);
+            }
+            return modelo;
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            return null;
+        }
+    }
 }

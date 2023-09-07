@@ -58,6 +58,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         listarArea();
         listarEmpleado();
         listarNomina();
+        listarPagos();
         btnEnviarArea.setEnabled(false);
         btnEnviarCargo.setEnabled(false);
     }
@@ -99,6 +100,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
             DefaultTableModel modelo;
             modelo=daoN.listar();
             tablanomina.setModel(modelo);
+        }catch(Exception e){
+            
+        }
+    }
+    private void listarPagos(){
+        try{
+            DefaultTableModel modelo;
+            modelo=daoP.listar();
+            tablapago.setModel(modelo);
         }catch(Exception e){
             
         }
@@ -218,12 +228,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         tablanomina = new javax.swing.JTable();
         jPanel9 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
-        jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         txtidpago = new javax.swing.JTextField();
         txttotalPago = new javax.swing.JTextField();
-        txtidnominap = new javax.swing.JTextField();
         btnCalcularPago = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
         jLabel31 = new javax.swing.JLabel();
@@ -247,7 +255,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel13 = new javax.swing.JPanel();
         btnregistrarPago = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablapago = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -1204,8 +1212,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
         jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Nomina"));
 
-        jLabel28.setText("ID:");
-
         jLabel29.setText("Total:");
 
         jLabel30.setText("IDPago:");
@@ -1225,13 +1231,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel29)
-                            .addComponent(jLabel28))
+                        .addComponent(jLabel29)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txttotalPago, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
-                            .addComponent(txtidnominap)))
+                        .addComponent(txttotalPago, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addComponent(jLabel30)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1253,11 +1255,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel29)
                     .addComponent(txttotalPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel28)
-                    .addComponent(txtidnominap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(58, 58, 58)
                 .addComponent(btnCalcularPago)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -1426,7 +1424,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablapago.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -1434,7 +1432,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane5.setViewportView(jTable1);
+        jScrollPane5.setViewportView(tablapago);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -1960,9 +1958,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         
         if(daoP.insertar(pa)){
             JOptionPane.showMessageDialog(null, "Pago registrado con exito");
-            //limpiarDatosNomina();
-            //limpiarTablaNomina();
-            //listarNomina();
+            
         }else{
             JOptionPane.showMessageDialog(null, "Error Al Registrar el pago");
         }
@@ -1973,9 +1969,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         f1=new SimpleDateFormat("yyyy-MM-dd").format(fecha1.getDate());
         f2=new SimpleDateFormat("yyyy-MM-dd").format(fecha2.getDate()); 
         if(daoP.editar(ide, f1, f2)){
-            //limpiarDatosNomina();
-            //limpiarTablaNomina();
-            //listarNomina();
+            limpiarDatosPago();
+            limpiarTablaPago();
+            listarPagos();
         }else{
             JOptionPane.showMessageDialog(null, "Error editar de pendiente a pagado");
         }
@@ -2065,6 +2061,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
             txtcargoN.setText("");
             txtprecioN.setText("");
     }
+    void limpiarDatosPago(){
+            txtidpago.setText("");
+            txttotalPago.setText("");
+            txtdocumentop.setText("");
+            txtidempleadop.setText("");
+            txtempleadop.setText("");
+            txtapellidop.setText(""); 
+            txtidcargop.setText("");
+            txtcargop.setText("");
+    }
     void limpiarTablaEmpleado(){
         for(int i=0;i<modeloEmpleado.getRowCount();i++){
             modeloEmpleado.removeRow(i);
@@ -2074,6 +2080,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     void limpiarTablaNomina(){
         for(int i=0;i<modeloNomina.getRowCount();i++){
             modeloNomina.removeRow(i);
+            i=0-1;
+        }
+    }
+    void limpiarTablaPago(){
+        for(int i=0;i<modeloPago.getRowCount();i++){
+            modeloPago.removeRow(i);
             i=0-1;
         }
     }
@@ -2157,7 +2169,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
@@ -2193,7 +2204,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTabbedPane panel;
     private javax.swing.JPanel parea;
     private javax.swing.JPanel pcargo;
@@ -2204,6 +2214,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTable tablacargos;
     private javax.swing.JTable tablaempleado;
     private javax.swing.JTable tablanomina;
+    private javax.swing.JTable tablapago;
     private javax.swing.JTextField txtapeempleado;
     private javax.swing.JTextField txtapeempleadoN;
     private javax.swing.JTextField txtapellidop;
@@ -2229,7 +2240,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField txtidempleadoN;
     private javax.swing.JTextField txtidempleadop;
     private javax.swing.JTextField txtidnomina;
-    private javax.swing.JTextField txtidnominap;
     private javax.swing.JTextField txtidpago;
     private javax.swing.JTextField txtnomEmpleadoN;
     private javax.swing.JTextField txtnomempleado;
