@@ -109,4 +109,25 @@ public class DaoPago {
         }
     }
     
+    public boolean editar(pago pa){
+       String sql="update pagos set idempleado=?,total=?,fecha1=?,fecha2=? where id=?";
+       try{
+            con=cn.conectar();
+            ps=con.prepareStatement(sql);
+            ps.setInt(1, pa.getIdempleado());
+            ps.setDouble(2, pa.getTotal());
+            ps.setDate(3, pa.getFecha1());
+            ps.setDate(4, pa.getFecha2());
+            ps.setInt(5, pa.getId());
+            int n=ps.executeUpdate();
+            if(n!=0){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            return false;
+        }
+   }
 }

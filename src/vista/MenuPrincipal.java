@@ -254,6 +254,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         fecha2 = new com.toedter.calendar.JDateChooser();
         jPanel13 = new javax.swing.JPanel();
         btnregistrarPago = new javax.swing.JButton();
+        btnEditarPago = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         tablapago = new javax.swing.JTable();
 
@@ -1407,6 +1408,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnEditarPago.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editar (1).png"))); // NOI18N
+        btnEditarPago.setText("Editar");
+        btnEditarPago.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarPagoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
@@ -1414,13 +1423,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(btnregistrarPago)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEditarPago)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnregistrarPago)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnregistrarPago)
+                    .addComponent(btnEditarPago))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1432,6 +1445,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
             }
         ));
+        tablapago.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablapagoMouseClicked(evt);
+            }
+        });
         jScrollPane5.setViewportView(tablapago);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
@@ -1870,7 +1888,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void btnEditarNominaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarNominaActionPerformed
         // TODO add your handling code here:
-         int fila=tablanomina.getSelectedRow();
+        int fila=tablanomina.getSelectedRow();
         if(fila==-1){
             JOptionPane.showMessageDialog(null, "Seleccione una nomina");
         }else{
@@ -2015,6 +2033,55 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCalcularPagoActionPerformed
 
+    private void tablapagoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablapagoMouseClicked
+        // TODO add your handling code here:
+         int fila=tablapago.getSelectedRow();
+        txtidpago.setText(tablapago.getValueAt(fila, 0).toString());
+        txtidempleadop.setText(tablapago.getValueAt(fila, 1).toString());
+        txtempleadop.setText(tablapago.getValueAt(fila, 2).toString());
+        txtapellidop.setText(tablapago.getValueAt(fila, 3).toString());
+        txtdocumentop.setText(tablapago.getValueAt(fila, 4).toString());
+        txtidcargop.setText(tablapago.getValueAt(fila, 5).toString());
+        txtcargop.setText(tablapago.getValueAt(fila, 6).toString());
+        fecha1.setDate(Date.valueOf(tablapago.getValueAt(fila, 7).toString()));
+        fecha2.setDate(Date.valueOf(tablapago.getValueAt(fila, 8).toString()));
+        txttotalPago.setText(tablapago.getValueAt(fila, 9).toString());
+    }//GEN-LAST:event_tablapagoMouseClicked
+
+    private void btnEditarPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarPagoActionPerformed
+        // TODO add your handling code here:
+        int fila=tablapago.getSelectedRow();
+        if(fila==-1){
+            JOptionPane.showMessageDialog(null, "Seleccione un Pago");
+        }else{
+            pa.setIdempleado(Integer.parseInt(txtidempleadop.getText()));
+            pa.setTotal(Double.parseDouble(txttotalPago.getText()));
+            Calendar cal;
+            int d,m,a;
+            cal=fecha1.getCalendar();
+            d=cal.get(Calendar.DAY_OF_MONTH);
+            m=cal.get(Calendar.MONTH);
+            a=cal.get(Calendar.YEAR)-1900;
+            pa.setFecha1(new Date(a,m,d));
+            Calendar cal1;
+            int d1,m1,a1;
+            cal1=fecha2.getCalendar();
+            d1=cal1.get(Calendar.DAY_OF_MONTH);
+            m1=cal1.get(Calendar.MONTH);
+            a1=cal1.get(Calendar.YEAR)-1900;
+            pa.setFecha2(new Date(a1,m1,d1));
+            pa.setId(Integer.parseInt(txtidpago.getText()));
+            if(daoP.editar(pa)){
+                JOptionPane.showMessageDialog(null, "se modifico con exito");
+                limpiarDatosPago();
+                limpiarTablaPago();
+                listarPagos();
+            }else{
+                JOptionPane.showMessageDialog(null, "Error al modificar");
+            }
+        }
+    }//GEN-LAST:event_btnEditarPagoActionPerformed
+
     void limpiarDatosCargo(){
         txtidcargo.setText("");
         txtcargo.setText("");
@@ -2129,6 +2196,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEditarNomina;
+    private javax.swing.JButton btnEditarPago;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnEliminarArea;
     private javax.swing.JButton btnEliminarEmpleado;
