@@ -52,8 +52,8 @@ public class DaoPago {
         return pa;
     }
    
-    public boolean editar(int ide,String f1,String f2){
-       String sql="UPDATE nomina set estado='pagado' WHERE idempleado="+ide+" and fecha BETWEEN  '"+f1+"' and '"+f2+"'";
+    public boolean editarN(int ide,String f1,String f2,String estado){
+       String sql="UPDATE nomina set estado='"+estado+"' WHERE idempleado="+ide+" and fecha BETWEEN  '"+f1+"' and '"+f2+"'";
        try{
             con=cn.conectar();
             ps=con.prepareStatement(sql);
@@ -119,6 +119,24 @@ public class DaoPago {
             ps.setDate(3, pa.getFecha1());
             ps.setDate(4, pa.getFecha2());
             ps.setInt(5, pa.getId());
+            int n=ps.executeUpdate();
+            if(n!=0){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            return false;
+        }
+   }
+    
+    public boolean elimiar(pago pa){
+       String sql="delete from pagos where id=?";
+       try{
+            con=cn.conectar();
+            ps=con.prepareStatement(sql); 
+            ps.setInt(1, pa.getId());
             int n=ps.executeUpdate();
             if(n!=0){
                 return true;

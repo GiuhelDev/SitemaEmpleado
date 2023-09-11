@@ -255,6 +255,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel13 = new javax.swing.JPanel();
         btnregistrarPago = new javax.swing.JButton();
         btnEditarPago = new javax.swing.JButton();
+        btnEliminarPago = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         tablapago = new javax.swing.JTable();
 
@@ -1416,6 +1417,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnEliminarPago.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
+        btnEliminarPago.setText("Eliminar");
+        btnEliminarPago.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarPagoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
@@ -1425,15 +1434,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(btnregistrarPago)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEditarPago)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEliminarPago)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnregistrarPago)
-                    .addComponent(btnEditarPago))
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnregistrarPago)
+                        .addComponent(btnEditarPago))
+                    .addComponent(btnEliminarPago))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1966,9 +1979,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Calendar cal1;
         int d1,m1,a1;
         cal1=fecha2.getCalendar();
-        d1=cal.get(Calendar.DAY_OF_MONTH);
-        m1=cal.get(Calendar.MONTH);
-        a1=cal.get(Calendar.YEAR)-1900;
+        d1=cal1.get(Calendar.DAY_OF_MONTH);
+        m1=cal1.get(Calendar.MONTH);
+        a1=cal1.get(Calendar.YEAR)-1900;
         pa.setFecha2(new Date(a1,m1,d1));
         
         pa.setIdempleado(Integer.parseInt(txtidempleadop.getText()));
@@ -1985,8 +1998,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         
         ide=Integer.parseInt(txtidempleadop.getText());
         f1=new SimpleDateFormat("yyyy-MM-dd").format(fecha1.getDate());
-        f2=new SimpleDateFormat("yyyy-MM-dd").format(fecha2.getDate()); 
-        if(daoP.editar(ide, f1, f2)){
+        f2=new SimpleDateFormat("yyyy-MM-dd").format(fecha2.getDate());
+        
+        if(daoP.editarN(ide, f1, f2,"pagado")){
             limpiarDatosPago();
             limpiarTablaPago();
             listarPagos();
@@ -2081,6 +2095,29 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnEditarPagoActionPerformed
+
+    private void btnEliminarPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarPagoActionPerformed
+        // TODO add your handling code here:
+         if(!txtidpago.getText().isEmpty()){
+            int confirmacion=JOptionPane.showConfirmDialog(rootPane, "¿Seguro de eliminar el Pago?","Confirmar",2);
+            if(confirmacion==0){
+                pa.setId(Integer.parseInt(txtidpago.getText()));
+                daoP.elimiar(pa);
+                int ide;
+                String f1,f2;
+                ide=Integer.parseInt(txtidempleadop.getText());
+                f1=new SimpleDateFormat("yyyy-MM-dd").format(fecha1.getDate());
+                f2=new SimpleDateFormat("yyyy-MM-dd").format(fecha2.getDate()); 
+                if(daoP.editarN(ide, f1, f2,"pendiente")){
+                limpiarDatosPago();
+                limpiarTablaPago();
+                listarPagos();
+        }else{
+            JOptionPane.showMessageDialog(null, "Error editar de pendiente a pagado");
+        }
+            }
+        }
+    }//GEN-LAST:event_btnEliminarPagoActionPerformed
 
     void limpiarDatosCargo(){
         txtidcargo.setText("");
@@ -2201,6 +2238,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminarArea;
     private javax.swing.JButton btnEliminarEmpleado;
     private javax.swing.JButton btnEliminarNomina;
+    private javax.swing.JButton btnEliminarPago;
     private javax.swing.JButton btnEmpleados;
     private javax.swing.JButton btnEnviarArea;
     private javax.swing.JButton btnEnviarCargo;
