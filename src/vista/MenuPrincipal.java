@@ -10,11 +10,15 @@ import Dao.DaoNomina;
 import Dao.DaoPago;
 
 import com.formdev.flatlaf.intellijthemes.FlatArcOrangeIJTheme;
+import java.awt.Image;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import modelo.areas;
 import modelo.cargo;
@@ -48,6 +52,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     pago pa=new pago();
     DaoPago daoP=new DaoPago();
     DefaultTableModel modeloPago=new DefaultTableModel();
+    
+    String Ruta = "";
     /**
      * Creates new form MenuPrincipal
      */
@@ -258,6 +264,25 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnEliminarPago = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         tablapago = new javax.swing.JTable();
+        jPanel14 = new javax.swing.JPanel();
+        jPanel15 = new javax.swing.JPanel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        jLabel40 = new javax.swing.JLabel();
+        jLabel41 = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
+        jLabel43 = new javax.swing.JLabel();
+        lblImagen = new javax.swing.JLabel();
+        txtempresa = new javax.swing.JTextField();
+        txtruc = new javax.swing.JTextField();
+        txtRs = new javax.swing.JTextField();
+        txttelefonoE = new javax.swing.JTextField();
+        txtdireccionE = new javax.swing.JTextField();
+        txtcorreoE = new javax.swing.JTextField();
+        btnCargarImagen = new javax.swing.JButton();
+        btnRegistrarE = new javax.swing.JButton();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -342,7 +367,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         );
         phomeLayout.setVerticalGroup(
             phomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 683, Short.MAX_VALUE)
+            .addGap(0, 691, Short.MAX_VALUE)
         );
 
         panel.addTab("Home", phome);
@@ -357,7 +382,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         );
         pusuariosLayout.setVerticalGroup(
             pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 683, Short.MAX_VALUE)
+            .addGap(0, 691, Short.MAX_VALUE)
         );
 
         panel.addTab("Usuarios", pusuarios);
@@ -651,7 +676,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
 
         panel.addTab("Empleados", pempleados);
@@ -781,7 +806,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addGroup(pcargoLayout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(203, Short.MAX_VALUE))
+                .addContainerGap(211, Short.MAX_VALUE))
         );
 
         panel.addTab("Cargo", pcargo);
@@ -898,7 +923,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addGroup(pareaLayout.createSequentialGroup()
                         .addGap(44, 44, 44)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(212, Short.MAX_VALUE))
+                .addContainerGap(220, Short.MAX_VALUE))
         );
 
         panel.addTab("Area", parea);
@@ -1204,7 +1229,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
 
         panel.addTab("Nomina", Pnomina);
@@ -1497,10 +1522,147 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         panel.addTab("Pagos", jPanel9);
+
+        jPanel14.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel15.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel15.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel28.setText("RUC:");
+
+        jLabel39.setText("Razon Social:");
+
+        jLabel40.setText("Telefono:");
+
+        jLabel41.setText("Direccion:");
+
+        jLabel42.setText("Correo:");
+
+        jLabel43.setText("Nombre:");
+
+        lblImagen.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        btnCargarImagen.setText("Cargar Imagen");
+        btnCargarImagen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCargarImagenActionPerformed(evt);
+            }
+        });
+
+        btnRegistrarE.setText("Registrar");
+
+        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+        jPanel15.setLayout(jPanel15Layout);
+        jPanel15Layout.setHorizontalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel15Layout.createSequentialGroup()
+                            .addComponent(jLabel43)
+                            .addGap(40, 40, 40)
+                            .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtruc, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtempresa, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel15Layout.createSequentialGroup()
+                            .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel39)
+                                .addComponent(jLabel40)
+                                .addComponent(jLabel41)
+                                .addComponent(jLabel42))
+                            .addGap(18, 18, 18)
+                            .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtRs)
+                                .addComponent(txttelefonoE)
+                                .addComponent(txtdireccionE)
+                                .addComponent(txtcorreoE))))
+                    .addComponent(jLabel28))
+                .addGap(18, 18, 18)
+                .addComponent(lblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnCargarImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnRegistrarE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(98, 98, 98))
+        );
+        jPanel15Layout.setVerticalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel43)
+                            .addComponent(txtempresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel28)
+                            .addComponent(txtruc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel39)
+                            .addComponent(txtRs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel40)
+                            .addComponent(txttelefonoE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel41)
+                            .addComponent(txtdireccionE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel42)
+                            .addComponent(txtcorreoE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel15Layout.createSequentialGroup()
+                                .addComponent(btnCargarImagen)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnRegistrarE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(lblImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(10, Short.MAX_VALUE))
+        );
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Empresa", "RUC", "Razon S.", "Telefono", "Direccion", "Correo", "Imagen"
+            }
+        ));
+        jScrollPane6.setViewportView(jTable1);
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane6))
+                .addContainerGap(10, Short.MAX_VALUE))
+        );
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(80, Short.MAX_VALUE))
+        );
+
+        panel.addTab("Datos", jPanel14);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -2119,6 +2281,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEliminarPagoActionPerformed
 
+    private void btnCargarImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarImagenActionPerformed
+        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter extensionFilter = new FileNameExtensionFilter("JPG, PNG & GIF", "jpg", "png", "gif");
+        fileChooser.setFileFilter(extensionFilter);
+
+        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            Ruta = fileChooser.getSelectedFile().getAbsolutePath();
+            Image mImagen = new ImageIcon(Ruta).getImage();
+            ImageIcon mIcono = new ImageIcon(mImagen.getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), 0));
+            lblImagen.setIcon(mIcono);
+        }
+    }//GEN-LAST:event_btnCargarImagenActionPerformed
+
     void limpiarDatosCargo(){
         txtidcargo.setText("");
         txtcargo.setText("");
@@ -2229,6 +2405,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscarNomina;
     private javax.swing.JButton btnCalcular;
     private javax.swing.JButton btnCalcularPago;
+    private javax.swing.JButton btnCargarImagen;
     private javax.swing.JButton btnCargo;
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnEditar;
@@ -2245,6 +2422,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnModificarArea;
     private javax.swing.JButton btnModificarEmpleado;
     private javax.swing.JButton btnRegistrar;
+    private javax.swing.JButton btnRegistrarE;
     private javax.swing.JButton btnRegistrarNomina;
     private javax.swing.JButton btnUsuarios;
     private javax.swing.JButton btnbuscarep;
@@ -2275,6 +2453,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
@@ -2286,7 +2465,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -2297,6 +2481,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -2310,6 +2496,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblImagen;
     private javax.swing.JTabbedPane panel;
     private javax.swing.JPanel parea;
     private javax.swing.JPanel pcargo;
@@ -2321,6 +2510,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTable tablaempleado;
     private javax.swing.JTable tablanomina;
     private javax.swing.JTable tablapago;
+    private javax.swing.JTextField txtRs;
     private javax.swing.JTextField txtapeempleado;
     private javax.swing.JTextField txtapeempleadoN;
     private javax.swing.JTextField txtapellidop;
@@ -2332,10 +2522,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField txtcargoempleado;
     private javax.swing.JTextField txtcargop;
     private javax.swing.JTextField txtcorreo;
+    private javax.swing.JTextField txtcorreoE;
+    private javax.swing.JTextField txtdireccionE;
     private javax.swing.JTextField txtdoc;
     private javax.swing.JTextField txtdocemopleadoN;
     private javax.swing.JTextField txtdocumentop;
     private javax.swing.JTextField txtempleadop;
+    private javax.swing.JTextField txtempresa;
     private javax.swing.JTextField txtidarea;
     private javax.swing.JTextField txtidareaempleado;
     private javax.swing.JTextField txtidcargo;
@@ -2351,7 +2544,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField txtnomempleado;
     private javax.swing.JTextField txtprecioCargo;
     private javax.swing.JTextField txtprecioN;
+    private javax.swing.JTextField txtruc;
     private javax.swing.JTextField txttelefono;
+    private javax.swing.JTextField txttelefonoE;
     private javax.swing.JTextField txttotal;
     private javax.swing.JTextField txttotalPago;
     // End of variables declaration//GEN-END:variables
