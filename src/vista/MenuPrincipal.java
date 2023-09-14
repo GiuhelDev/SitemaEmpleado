@@ -5,21 +5,30 @@
 package vista;
 import Dao.DaoArea;
 import Dao.DaoCargo;
+import Dao.DaoDatos;
 import Dao.DaoEmpleado;
 import Dao.DaoNomina;
 import Dao.DaoPago;
-
 import com.formdev.flatlaf.intellijthemes.FlatArcOrangeIJTheme;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import modelo.Datos;
 import modelo.areas;
 import modelo.cargo;
 import modelo.empleado;
@@ -53,6 +62,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
     DaoPago daoP=new DaoPago();
     DefaultTableModel modeloPago=new DefaultTableModel();
     
+    Datos da=new Datos();
+    DaoDatos daoD=new DaoDatos();
+    DefaultTableModel modeloDatos=new DefaultTableModel();
+    
     String Ruta = "";
     /**
      * Creates new form MenuPrincipal
@@ -65,6 +78,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         listarEmpleado();
         listarNomina();
         listarPagos();
+        modeloDatos.addColumn("ID");
+        modeloDatos.addColumn("Titulo");
+        modeloDatos.addColumn("Imagen");
+        modeloDatos.addColumn("Imagen");
+        modeloDatos.addColumn("Imagen");
+        modeloDatos.addColumn("Imagen");
+        modeloDatos.addColumn("Imagen");
+        modeloDatos.addColumn("Imagen");
         btnEnviarArea.setEnabled(false);
         btnEnviarCargo.setEnabled(false);
     }
@@ -119,6 +140,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             
         }
     }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -282,7 +304,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnCargarImagen = new javax.swing.JButton();
         btnRegistrarE = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabladatos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -1554,6 +1576,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
 
         btnRegistrarE.setText("Registrar");
+        btnRegistrarE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarEActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -1631,7 +1658,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addContainerGap(10, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabladatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -1639,7 +1666,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 "ID", "Empresa", "RUC", "Razon S.", "Telefono", "Direccion", "Correo", "Imagen"
             }
         ));
-        jScrollPane6.setViewportView(jTable1);
+        tabladatos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabladatosMouseClicked(evt);
+            }
+        });
+        jScrollPane6.setViewportView(tabladatos);
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -2295,6 +2327,46 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCargarImagenActionPerformed
 
+    private void btnRegistrarEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarEActionPerformed
+        // TODO add your handling code here:
+            da.setNombre(txtempresa.getText());
+            da.setRUC(txtruc.getText());
+            da.setRasonS(txtRs.getText());
+            da.setTelefono(txttelefonoE.getText());
+            da.setDireccion(txtdireccionE.getText());
+            da.setCorreo(txtcorreoE.getText());
+            da.setImagen(getImagen(Ruta));
+            daoD.Agregar(da);
+            limpiarDatos();
+            //CargarImagenes();
+        
+    }//GEN-LAST:event_btnRegistrarEActionPerformed
+
+    private void tabladatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabladatosMouseClicked
+       
+    }//GEN-LAST:event_tabladatosMouseClicked
+
+    private byte[] getImagen(String Ruta) {
+        File imagen = new File(Ruta);
+        try {
+            byte[] icono = new byte[(int) imagen.length()];
+            InputStream input = new FileInputStream(imagen);
+            input.read(icono);
+            return icono;
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+    void limpiarDatos(){
+        txtempresa.setText("");
+         txtruc.setText("");
+         txtRs.setText("");
+         txttelefonoE.setText("");
+        txtdireccionE.setText("");
+         txtcorreoE.setText("");
+         lblImagen.setText("");
+    }
+    
     void limpiarDatosCargo(){
         txtidcargo.setText("");
         txtcargo.setText("");
@@ -2497,7 +2569,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblImagen;
     private javax.swing.JTabbedPane panel;
     private javax.swing.JPanel parea;
@@ -2507,6 +2578,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel pusuarios;
     private javax.swing.JTable tablaArea;
     private javax.swing.JTable tablacargos;
+    private javax.swing.JTable tabladatos;
     private javax.swing.JTable tablaempleado;
     private javax.swing.JTable tablanomina;
     private javax.swing.JTable tablapago;
