@@ -13,6 +13,7 @@ import com.formdev.flatlaf.intellijthemes.FlatArcOrangeIJTheme;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -22,13 +23,16 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import javax.imageio.ImageIO;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import modelo.Datos;
+import modelo.RenderImagen;
 import modelo.areas;
 import modelo.cargo;
 import modelo.empleado;
@@ -79,15 +83,57 @@ public class MenuPrincipal extends javax.swing.JFrame {
         listarNomina();
         listarPagos();
         modeloDatos.addColumn("ID");
-        modeloDatos.addColumn("Titulo");
+        modeloDatos.addColumn("Empresa");
+        modeloDatos.addColumn("RUC");
+        modeloDatos.addColumn("Razon Social");
+        modeloDatos.addColumn("Telefono");
+        modeloDatos.addColumn("Direccion");
+        modeloDatos.addColumn("Correo");
         modeloDatos.addColumn("Imagen");
-        modeloDatos.addColumn("Imagen");
-        modeloDatos.addColumn("Imagen");
-        modeloDatos.addColumn("Imagen");
-        modeloDatos.addColumn("Imagen");
-        modeloDatos.addColumn("Imagen");
+        ListarDatos();
         btnEnviarArea.setEnabled(false);
         btnEnviarCargo.setEnabled(false);
+    }
+    
+    private void ListarDatos(){
+        tabladatos.setDefaultRenderer(Object.class, new RenderImagen());
+        
+        ArrayList datos;
+        Object Datos[] =new Object[8];
+        datos=daoD.Listar();
+        if(datos!=null){
+            for(int i=0;i<datos.size();i++){
+                da = (Datos) datos.get(i);
+                Datos[0]=String.valueOf(da.getId());
+                Datos[1]=da.getNombre();
+                Datos[2]=da.getRUC();
+                Datos[3]=da.getRasonS();
+                Datos[4]=da.getTelefono();
+                Datos[5]=da.getDireccion();
+                Datos[6]=da.getCorreo();
+                try{
+                    byte[] imagen =da.getImagen();
+                    BufferedImage buffer=null;
+                    InputStream inputstream=new ByteArrayInputStream(imagen);
+                    buffer=ImageIO.read(inputstream);
+                    ImageIcon incono=new ImageIcon(buffer.getScaledInstance(60, 60, 0));
+                    Datos[7]=new JLabel(incono);
+                }catch (Exception e){
+                    Datos[7]=new JLabel("SIN IMAGEN");  
+                }
+                modeloDatos.addRow(Datos);
+            }
+            tabladatos.setModel(modeloDatos);
+            tabladatos.setRowHeight(60);
+            tabladatos.getColumnModel().getColumn(0).setPreferredWidth(60);
+            tabladatos.getColumnModel().getColumn(1).setPreferredWidth(60);
+            tabladatos.getColumnModel().getColumn(2).setPreferredWidth(60);
+            tabladatos.getColumnModel().getColumn(3).setPreferredWidth(60);
+            tabladatos.getColumnModel().getColumn(4).setPreferredWidth(60);
+            tabladatos.getColumnModel().getColumn(5).setPreferredWidth(60);
+            tabladatos.getColumnModel().getColumn(6).setPreferredWidth(60);
+            tabladatos.getColumnModel().getColumn(7).setPreferredWidth(60);
+        }
     }
 
     private void listar(){
@@ -2339,7 +2385,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             daoD.Agregar(da);
             limpiarDatos();
             //CargarImagenes();
-        
+          
     }//GEN-LAST:event_btnRegistrarEActionPerformed
 
     private void tabladatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabladatosMouseClicked

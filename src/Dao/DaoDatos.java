@@ -5,6 +5,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 import modelo.Datos;
 
 public class DaoDatos {
@@ -27,6 +30,7 @@ public class DaoDatos {
             ps.setString(6, d.getCorreo());
             ps.setBytes(7, d.getImagen());
             ps.executeUpdate();
+            
         } catch (SQLException ex) {
             
         }finally {
@@ -36,5 +40,30 @@ public class DaoDatos {
             }
         }
     }
-    
+   
+     public ArrayList Listar(){
+        ArrayList empresa=new ArrayList<>();
+        String sql="select * from datos";
+        try{
+            con=cn.conectar();
+            ps=con.prepareStatement(sql);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                Datos d=new Datos();
+                d.setId(rs.getInt(1));
+                d.setNombre(rs.getString(2));
+                d.setRUC(rs.getString(3));
+                d.setRasonS(rs.getString(4));
+                d.setTelefono(rs.getString(5));
+                d.setDireccion(rs.getString(6));
+                d.setCorreo(rs.getString(7));
+                d.setImagen(rs.getBytes(8));
+                empresa.add(d);
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            return null;
+        }
+        return empresa;
+    }
 }
