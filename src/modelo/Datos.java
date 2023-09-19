@@ -1,6 +1,8 @@
 
 package modelo;
 
+import javax.swing.ImageIcon;
+
 public class Datos {
     
     int id;
@@ -89,6 +91,5 @@ public class Datos {
     public void setImagen(byte[] imagen) {
         this.imagen = imagen;
     }
-    
-    
+
 }

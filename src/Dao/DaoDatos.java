@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JOptionPane;
 import modelo.Datos;
 
@@ -66,4 +65,48 @@ public class DaoDatos {
         }
         return empresa;
     }
+ 
+     public boolean BuscarImagen(Datos d){
+       String sql="SELECT imagen from datos where id=?";
+       try{
+            con=cn.conectar();
+            ps=con.prepareStatement(sql);
+            ps.setInt(1, d.getId());
+            rs=ps.executeQuery();
+            if(rs.next()){
+                d.setImagen(rs.getBytes(1));
+                return true;
+            }else{
+                 return false;
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            return false;
+        }
+   }
+     
+     public boolean editar(Datos d){
+       String sql="update datos set empresa=?,ruc=?,razonS=?,telefono=?,direccion=?,correo=?,imagen=? where id=?";
+       try{
+            con=cn.conectar();
+            ps=con.prepareStatement(sql);
+            ps.setString(1, d.getNombre());
+            ps.setString(2, d.getRUC());
+            ps.setString(3, d.getRasonS());
+            ps.setString(4, d.getTelefono());
+            ps.setString(5, d.getDireccion());
+            ps.setString(6, d.getCorreo());
+            ps.setBytes(7, d.getImagen());
+            ps.setInt(8, d.getId());
+            int n=ps.executeUpdate();
+            if(n!=0){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            return false;
+        }
+   }
 }

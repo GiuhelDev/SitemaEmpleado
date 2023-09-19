@@ -16,12 +16,15 @@ import java.io.ByteArrayInputStream;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 import javax.swing.ImageIcon;
@@ -71,6 +74,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     DefaultTableModel modeloDatos=new DefaultTableModel();
     
     String Ruta = "";
+    String valor="1";
     /**
      * Creates new form MenuPrincipal
      */
@@ -300,7 +304,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnEliminarNomina = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         tablanomina = new javax.swing.JTable();
-        jPanel9 = new javax.swing.JPanel();
+        Ppagos = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
@@ -332,7 +336,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnEliminarPago = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         tablapago = new javax.swing.JTable();
-        jPanel14 = new javax.swing.JPanel();
+        Pdatos = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
         jLabel28 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
@@ -348,6 +352,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         txtdireccionE = new javax.swing.JTextField();
         txtcorreoE = new javax.swing.JTextField();
         btnCargarImagen = new javax.swing.JButton();
+        txtIdDato = new javax.swing.JLabel();
+        btnEditardatos = new javax.swing.JButton();
         btnRegistrarE = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
         tabladatos = new javax.swing.JTable();
@@ -1302,7 +1308,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         panel.addTab("Nomina", Pnomina);
 
-        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
+        Ppagos.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
         jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Nomina"));
@@ -1558,15 +1564,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(tablapago);
 
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
+        javax.swing.GroupLayout PpagosLayout = new javax.swing.GroupLayout(Ppagos);
+        Ppagos.setLayout(PpagosLayout);
+        PpagosLayout.setHorizontalGroup(
+            PpagosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PpagosLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PpagosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel9Layout.createSequentialGroup()
+                    .addGroup(PpagosLayout.createSequentialGroup()
                         .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1575,13 +1581,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(jScrollPane5))
                 .addContainerGap())
         );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        PpagosLayout.setVerticalGroup(
+            PpagosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PpagosLayout.createSequentialGroup()
+                .addGroup(PpagosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PpagosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jPanel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGroup(PpagosLayout.createSequentialGroup()
                             .addGap(23, 23, 23)
                             .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(40, 40, 40)))
@@ -1593,9 +1599,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        panel.addTab("Pagos", jPanel9);
+        panel.addTab("Pagos", Ppagos);
 
-        jPanel14.setBackground(new java.awt.Color(255, 255, 255));
+        Pdatos.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel15.setBackground(new java.awt.Color(255, 255, 255));
         jPanel15.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -1618,6 +1624,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnCargarImagen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCargarImagenActionPerformed(evt);
+            }
+        });
+
+        txtIdDato.setText("2");
+
+        btnEditardatos.setText("Editar");
+        btnEditardatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditardatosActionPerformed(evt);
             }
         });
 
@@ -1657,11 +1672,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel28))
                 .addGap(18, 18, 18)
                 .addComponent(lblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(txtIdDato, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnCargarImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnRegistrarE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(98, 98, 98))
+                    .addComponent(btnRegistrarE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnEditardatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCargarImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(31, 31, 31))
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1696,9 +1715,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
                         .addGap(3, 3, 3)
                         .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel15Layout.createSequentialGroup()
-                                .addComponent(btnCargarImagen)
+                                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(btnCargarImagen)
+                                    .addComponent(txtIdDato, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnRegistrarE)
+                                .addGap(12, 12, 12)
+                                .addComponent(btnEditardatos)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(lblImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(10, Short.MAX_VALUE))
@@ -1719,20 +1742,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jScrollPane6.setViewportView(tabladatos);
 
-        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
-        jPanel14.setLayout(jPanel14Layout);
-        jPanel14Layout.setHorizontalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel14Layout.createSequentialGroup()
+        javax.swing.GroupLayout PdatosLayout = new javax.swing.GroupLayout(Pdatos);
+        Pdatos.setLayout(PdatosLayout);
+        PdatosLayout.setHorizontalGroup(
+            PdatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PdatosLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(PdatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane6))
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
-        jPanel14Layout.setVerticalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel14Layout.createSequentialGroup()
+        PdatosLayout.setVerticalGroup(
+            PdatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PdatosLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -1740,7 +1763,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addContainerGap(80, Short.MAX_VALUE))
         );
 
-        panel.addTab("Datos", jPanel14);
+        panel.addTab("Datos", Pdatos);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -2371,6 +2394,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             ImageIcon mIcono = new ImageIcon(mImagen.getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), 0));
             lblImagen.setIcon(mIcono);
         }
+        valor="2";
     }//GEN-LAST:event_btnCargarImagenActionPerformed
 
     private void btnRegistrarEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarEActionPerformed
@@ -2384,14 +2408,76 @@ public class MenuPrincipal extends javax.swing.JFrame {
             da.setImagen(getImagen(Ruta));
             daoD.Agregar(da);
             limpiarDatos();
-            //CargarImagenes();
-          
+            limpiarTablaDAtos();
+            ListarDatos();
     }//GEN-LAST:event_btnRegistrarEActionPerformed
 
     private void tabladatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabladatosMouseClicked
-       
+         int fila=tabladatos.getSelectedRow();
+        txtIdDato.setText(tabladatos.getValueAt(fila, 0).toString());
+        txtempresa.setText(tabladatos.getValueAt(fila, 1).toString());
+        txtruc.setText(tabladatos.getValueAt(fila, 2).toString());
+        txtRs.setText(tabladatos.getValueAt(fila, 3).toString());
+        txttelefonoE.setText(tabladatos.getValueAt(fila, 4).toString());
+        txtdireccionE.setText(tabladatos.getValueAt(fila, 5).toString());
+        txtcorreoE.setText(tabladatos.getValueAt(fila, 6).toString());
+        da.setId(Integer.parseInt(txtIdDato.getText()));
+        if(daoD.BuscarImagen(da)){
+            try{
+                byte[] imagen =da.getImagen();
+                BufferedImage buffer=null;
+                InputStream inputstream=new ByteArrayInputStream(imagen);
+                buffer=ImageIO.read(inputstream);
+                ImageIcon incono=new ImageIcon(buffer.getScaledInstance(180, 180, 0));
+                lblImagen.setIcon(incono);
+                valor="1";
+            }catch (Exception e){
+                lblImagen.setText("Error");
+            }
+        }
     }//GEN-LAST:event_tabladatosMouseClicked
 
+    private void btnEditardatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditardatosActionPerformed
+        // TODO add your handling code here:
+        int fila=tabladatos.getSelectedRow();
+        if(fila==-1){
+            JOptionPane.showMessageDialog(null, "Seleccione los datos");
+        }else{
+            da.setNombre(txtempresa.getText());
+            da.setRUC(txtruc.getText());
+            da.setRasonS(txtRs.getText());
+            da.setTelefono(txttelefonoE.getText());
+            da.setDireccion(txtdireccionE.getText());
+            da.setCorreo(txtcorreoE.getText());
+            if(valor.equals("1")){
+                da.setImagen(getImagenEditar());
+            }else{
+                da.setImagen(getImagen(Ruta));
+            }
+            da.setId(Integer.parseInt(txtIdDato.getText()));
+            if(daoD.editar(da)){
+                JOptionPane.showMessageDialog(null, "se modifico con exito");
+                limpiarDatos();
+                limpiarTablaDAtos();
+                ListarDatos();
+            }else{
+                JOptionPane.showMessageDialog(null, "Error al modificar");
+            }
+        }
+    }//GEN-LAST:event_btnEditardatosActionPerformed
+    
+    private byte[] getImagenEditar() {
+        byte[] imagen =da.getImagen();
+        try{
+            BufferedImage buffer=null;
+            InputStream inputstream=new ByteArrayInputStream(imagen);
+            buffer=ImageIO.read(inputstream);
+        }catch (Exception e){
+            
+        }
+        return imagen;
+    }
+    
     private byte[] getImagen(String Ruta) {
         File imagen = new File(Ruta);
         try {
@@ -2411,6 +2497,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         txtdireccionE.setText("");
          txtcorreoE.setText("");
          lblImagen.setText("");
+         lblImagen.setIcon(null);
     }
     
     void limpiarDatosCargo(){
@@ -2487,6 +2574,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
             i=0-1;
         }
     }
+     void limpiarTablaDAtos(){
+        for(int i=0;i<modeloDatos.getRowCount();i++){
+            modeloDatos.removeRow(i);
+            i=0-1;
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -2512,7 +2605,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Pdatos;
     private javax.swing.JPanel Pnomina;
+    private javax.swing.JPanel Ppagos;
     private javax.swing.JButton btnArea;
     private javax.swing.JButton btnBuscaArea;
     private javax.swing.JButton btnBuscaCarho;
@@ -2529,6 +2624,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEditarNomina;
     private javax.swing.JButton btnEditarPago;
+    private javax.swing.JButton btnEditardatos;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnEliminarArea;
     private javax.swing.JButton btnEliminarEmpleado;
@@ -2599,7 +2695,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -2608,7 +2703,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -2628,6 +2722,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTable tablaempleado;
     private javax.swing.JTable tablanomina;
     private javax.swing.JTable tablapago;
+    private javax.swing.JLabel txtIdDato;
     private javax.swing.JTextField txtRs;
     private javax.swing.JTextField txtapeempleado;
     private javax.swing.JTextField txtapeempleadoN;
