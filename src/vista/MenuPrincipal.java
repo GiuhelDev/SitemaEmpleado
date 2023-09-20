@@ -9,22 +9,22 @@ import Dao.DaoDatos;
 import Dao.DaoEmpleado;
 import Dao.DaoNomina;
 import Dao.DaoPago;
+import Dao.conexion;
 import com.formdev.flatlaf.intellijthemes.FlatArcOrangeIJTheme;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
-
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Connection;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Map;
 import javax.imageio.ImageIO;
 
 import javax.swing.ImageIcon;
@@ -41,6 +41,11 @@ import modelo.cargo;
 import modelo.empleado;
 import modelo.nomina;
 import modelo.pago;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 
 /**
@@ -334,6 +339,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnregistrarPago = new javax.swing.JButton();
         btnEditarPago = new javax.swing.JButton();
         btnEliminarPago = new javax.swing.JButton();
+        btnNuevoPago = new javax.swing.JButton();
+        btnGenerarPDFPAGO = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         tablapago = new javax.swing.JTable();
         Pdatos = new javax.swing.JPanel();
@@ -1524,17 +1531,35 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnNuevoPago.setText("Nuevo");
+        btnNuevoPago.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoPagoActionPerformed(evt);
+            }
+        });
+
+        btnGenerarPDFPAGO.setText("PDF");
+        btnGenerarPDFPAGO.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarPDFPAGOActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(24, 24, 24)
+                .addComponent(btnNuevoPago)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnregistrarPago)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEditarPago)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEliminarPago)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnGenerarPDFPAGO)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel13Layout.setVerticalGroup(
@@ -1542,10 +1567,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnNuevoPago)
                     .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnEliminarPago)
                         .addComponent(btnregistrarPago)
-                        .addComponent(btnEditarPago))
-                    .addComponent(btnEliminarPago))
+                        .addComponent(btnEditarPago)
+                        .addComponent(btnGenerarPDFPAGO)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1677,9 +1704,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnRegistrarE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(btnEditardatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCargarImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(btnEditardatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCargarImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(31, 31, 31))
         );
         jPanel15Layout.setVerticalGroup(
@@ -2264,7 +2290,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         f2=new SimpleDateFormat("yyyy-MM-dd").format(fecha2.getDate());
         
         if(daoP.editarN(ide, f1, f2,"pagado")){
-            limpiarDatosPago();
+            GenerarPDFpagos(ide, f1, f2);
             limpiarTablaPago();
             listarPagos();
         }else{
@@ -2465,6 +2491,22 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnEditardatosActionPerformed
+
+    private void btnNuevoPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoPagoActionPerformed
+        // TODO add your handling code here:
+        limpiarDatosPago();
+    }//GEN-LAST:event_btnNuevoPagoActionPerformed
+
+    private void btnGenerarPDFPAGOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarPDFPAGOActionPerformed
+        // TODO add your handling code here:
+        int ide;
+        String f1,f2;
+        
+        ide=Integer.parseInt(txtidempleadop.getText());
+        f1=new SimpleDateFormat("yyyy-MM-dd").format(fecha1.getDate());
+        f2=new SimpleDateFormat("yyyy-MM-dd").format(fecha2.getDate());
+        GenerarPDFpagos(ide, f1, f2);
+    }//GEN-LAST:event_btnGenerarPDFPAGOActionPerformed
     
     private byte[] getImagenEditar() {
         byte[] imagen =da.getImagen();
@@ -2580,6 +2622,28 @@ public class MenuPrincipal extends javax.swing.JFrame {
             i=0-1;
         }
     }
+     
+     private Connection conection=new conexion().conectar();
+     
+    void GenerarPDFpagos(int id,String f1,String f2){
+        Map p=new HashMap();
+        p.put("idempleado", id);
+        p.put("fecha1", f1);
+        p.put("fecha2", f2);
+        JasperReport report;
+        JasperPrint print;
+        
+        try{
+            report=JasperCompileManager.compileReport(new File("").getAbsolutePath()+
+                    "/src/reportes/pagosEmpleado.jrxml");
+            print =JasperFillManager.fillReport(report, p,conection);
+            JasperViewer view=new JasperViewer(print,false);
+            view.setTitle("Comprobante de pago");
+            view.setVisible(true);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -2633,8 +2697,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnEmpleados;
     private javax.swing.JButton btnEnviarArea;
     private javax.swing.JButton btnEnviarCargo;
+    private javax.swing.JButton btnGenerarPDFPAGO;
     private javax.swing.JButton btnModificarArea;
     private javax.swing.JButton btnModificarEmpleado;
+    private javax.swing.JButton btnNuevoPago;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnRegistrarE;
     private javax.swing.JButton btnRegistrarNomina;
