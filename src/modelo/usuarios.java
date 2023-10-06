@@ -6,16 +6,28 @@ public class usuarios {
     String nombre;
     String usuario;
     String password;
+    String tipo;
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 
     public usuarios() {
     }
 
-    public usuarios(int idUser, String nombre, String usuario, String password) {
+    public usuarios(int idUser, String nombre, String usuario, String password, String tipo) {
         this.idUser = idUser;
         this.nombre = nombre;
         this.usuario = usuario;
         this.password = password;
+        this.tipo = tipo;
     }
+
+    
 
     public int getIdUser() {
         return idUser;

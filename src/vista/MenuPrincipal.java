@@ -9,6 +9,7 @@ import Dao.DaoDatos;
 import Dao.DaoEmpleado;
 import Dao.DaoNomina;
 import Dao.DaoPago;
+import Dao.DaoUsuarios;
 import Dao.conexion;
 import com.formdev.flatlaf.intellijthemes.FlatArcOrangeIJTheme;
 import java.awt.Image;
@@ -41,6 +42,7 @@ import modelo.cargo;
 import modelo.empleado;
 import modelo.nomina;
 import modelo.pago;
+import modelo.usuarios;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -77,6 +79,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
     Datos da=new Datos();
     DaoDatos daoD=new DaoDatos();
     DefaultTableModel modeloDatos=new DefaultTableModel();
+    
+    usuarios usu=new usuarios();
+    DaoUsuarios daoU=new DaoUsuarios();
+    DefaultTableModel modeloUsuario=new DefaultTableModel();
+    
     
     String Ruta = "";
     String valor="1";
@@ -214,7 +221,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnCerrar = new javax.swing.JButton();
         panel = new javax.swing.JTabbedPane();
         phome = new javax.swing.JPanel();
-        pusuarios = new javax.swing.JPanel();
         pempleados = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -364,6 +370,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnRegistrarE = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
         tabladatos = new javax.swing.JTable();
+        pusuarios = new javax.swing.JPanel();
+        txtidusuario = new javax.swing.JTextField();
+        jLabel44 = new javax.swing.JLabel();
+        jLabel45 = new javax.swing.JLabel();
+        jLabel46 = new javax.swing.JLabel();
+        jLabel47 = new javax.swing.JLabel();
+        jLabel48 = new javax.swing.JLabel();
+        txtnomusuario = new javax.swing.JTextField();
+        txtusuario = new javax.swing.JTextField();
+        cbotipousuario = new javax.swing.JComboBox<>();
+        btnGuardarUsuario = new javax.swing.JButton();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        usuarios = new javax.swing.JTable();
+        txtpass = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -448,25 +468,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         );
         phomeLayout.setVerticalGroup(
             phomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 691, Short.MAX_VALUE)
+            .addGap(0, 679, Short.MAX_VALUE)
         );
 
         panel.addTab("Home", phome);
-
-        pusuarios.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout pusuariosLayout = new javax.swing.GroupLayout(pusuarios);
-        pusuarios.setLayout(pusuariosLayout);
-        pusuariosLayout.setHorizontalGroup(
-            pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 776, Short.MAX_VALUE)
-        );
-        pusuariosLayout.setVerticalGroup(
-            pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 691, Short.MAX_VALUE)
-        );
-
-        panel.addTab("Usuarios", pusuarios);
 
         pempleados.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -757,7 +762,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
 
         panel.addTab("Empleados", pempleados);
@@ -887,7 +892,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addGroup(pcargoLayout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(211, Short.MAX_VALUE))
+                .addContainerGap(199, Short.MAX_VALUE))
         );
 
         panel.addTab("Cargo", pcargo);
@@ -1004,7 +1009,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addGroup(pareaLayout.createSequentialGroup()
                         .addGap(44, 44, 44)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(220, Short.MAX_VALUE))
+                .addContainerGap(208, Short.MAX_VALUE))
         );
 
         panel.addTab("Area", parea);
@@ -1310,7 +1315,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         panel.addTab("Nomina", Pnomina);
@@ -1623,7 +1628,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         panel.addTab("Pagos", Ppagos);
@@ -1786,10 +1791,100 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         panel.addTab("Datos", Pdatos);
+
+        pusuarios.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel44.setText("ID");
+
+        jLabel45.setText("Nombre");
+
+        jLabel46.setText("Usuario");
+
+        jLabel47.setText("Password");
+
+        jLabel48.setText("Tipo");
+
+        cbotipousuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Jefe" }));
+
+        btnGuardarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/guardar.png"))); // NOI18N
+        btnGuardarUsuario.setText("Registrar");
+        btnGuardarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarUsuarioActionPerformed(evt);
+            }
+        });
+
+        usuarios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Nombre", "Usuario", "Password", "Tipo"
+            }
+        ));
+        jScrollPane7.setViewportView(usuarios);
+
+        javax.swing.GroupLayout pusuariosLayout = new javax.swing.GroupLayout(pusuarios);
+        pusuarios.setLayout(pusuariosLayout);
+        pusuariosLayout.setHorizontalGroup(
+            pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pusuariosLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 739, Short.MAX_VALUE)
+                    .addGroup(pusuariosLayout.createSequentialGroup()
+                        .addGroup(pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel44)
+                            .addComponent(jLabel45)
+                            .addComponent(jLabel46)
+                            .addComponent(jLabel47)
+                            .addComponent(jLabel48))
+                        .addGap(24, 24, 24)
+                        .addGroup(pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtnomusuario)
+                            .addComponent(txtidusuario)
+                            .addComponent(txtusuario)
+                            .addComponent(cbotipousuario, 0, 178, Short.MAX_VALUE)
+                            .addComponent(txtpass))
+                        .addGap(45, 45, 45)
+                        .addComponent(btnGuardarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        pusuariosLayout.setVerticalGroup(
+            pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pusuariosLayout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addGroup(pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel44)
+                    .addComponent(txtidusuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGuardarUsuario))
+                .addGap(12, 12, 12)
+                .addGroup(pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel45)
+                    .addComponent(txtnomusuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel46)
+                    .addComponent(txtusuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel47)
+                    .addComponent(txtpass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel48)
+                    .addComponent(cbotipousuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(132, Short.MAX_VALUE))
+        );
+
+        panel.addTab("Usuarios", pusuarios);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -2507,6 +2602,22 @@ public class MenuPrincipal extends javax.swing.JFrame {
         f2=new SimpleDateFormat("yyyy-MM-dd").format(fecha2.getDate());
         GenerarPDFpagos(ide, f1, f2);
     }//GEN-LAST:event_btnGenerarPDFPAGOActionPerformed
+
+    private void btnGuardarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarUsuarioActionPerformed
+        // TODO add your handling code here:
+        usu.setNombre(txtnomusuario.getText());
+        usu.setUsuario(txtusuario.getText());
+        usu.setPassword(txtpass.getText());
+        usu.setTipo(cbotipousuario.getSelectedItem().toString());
+        if(daoU.insertar(usu)){
+            JOptionPane.showMessageDialog(null, "Usuario registrado con exito");
+            limpiarDatosUsuario();
+            limpiarTablaUsuario();
+            //listarUsuario();
+        }else{
+            JOptionPane.showMessageDialog(null, "Error Al Registrar el Usuario");
+        }
+    }//GEN-LAST:event_btnGuardarUsuarioActionPerformed
     
     private byte[] getImagenEditar() {
         byte[] imagen =da.getImagen();
@@ -2564,6 +2675,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
             i=0-1;
         }
     }
+     void limpiarTablaUsuario(){
+        for(int i=0;i<modeloUsuario.getRowCount();i++){
+            modeloUsuario.removeRow(i);
+            i=0-1;
+        }
+    }
     void limpiarDatosEmpleado(){
         txtidempleado.setText("");
         txtnomempleado.setText("");
@@ -2575,6 +2692,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         txtareaempleado.setText("");
         txtidcargoempleado.setText("");
         txtcargoempleado.setText("");
+    }
+     void limpiarDatosUsuario(){
+        txtidusuario.setText("");
+        txtnomusuario.setText("");
+        txtusuario.setText("");
+        txtpass.setText("");
     }
     void limpiarDatosNomina(){
             txtidnomina.setText("");
@@ -2698,6 +2821,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnEnviarArea;
     private javax.swing.JButton btnEnviarCargo;
     private javax.swing.JButton btnGenerarPDFPAGO;
+    private javax.swing.JButton btnGuardarUsuario;
     private javax.swing.JButton btnModificarArea;
     private javax.swing.JButton btnModificarEmpleado;
     private javax.swing.JButton btnNuevoPago;
@@ -2710,6 +2834,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnregistrarPago;
     private javax.swing.JButton btnregistrarempleado;
     private javax.swing.JComboBox<String> cbotipodoc;
+    private javax.swing.JComboBox<String> cbotipousuario;
     private com.toedter.calendar.JDateChooser dateFecha;
     private com.toedter.calendar.JDateChooser fecha1;
     private com.toedter.calendar.JDateChooser fecha2;
@@ -2751,6 +2876,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -2775,6 +2905,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JLabel lblImagen;
     private javax.swing.JTabbedPane panel;
     private javax.swing.JPanel parea;
@@ -2819,8 +2950,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField txtidempleadop;
     private javax.swing.JTextField txtidnomina;
     private javax.swing.JTextField txtidpago;
+    private javax.swing.JTextField txtidusuario;
     private javax.swing.JTextField txtnomEmpleadoN;
     private javax.swing.JTextField txtnomempleado;
+    private javax.swing.JTextField txtnomusuario;
+    private javax.swing.JPasswordField txtpass;
     private javax.swing.JTextField txtprecioCargo;
     private javax.swing.JTextField txtprecioN;
     private javax.swing.JTextField txtruc;
@@ -2828,5 +2962,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField txttelefonoE;
     private javax.swing.JTextField txttotal;
     private javax.swing.JTextField txttotalPago;
+    private javax.swing.JTextField txtusuario;
+    private javax.swing.JTable usuarios;
     // End of variables declaration//GEN-END:variables
 }

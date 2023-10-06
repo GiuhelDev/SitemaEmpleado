@@ -32,4 +32,25 @@ public class DaoUsuarios {
         }
         return us;
     }
+    
+    public boolean insertar(usuarios u){
+        String sql="insert into usuarios (nombre,usuario,password,tipo) values (?,?,?,?)";
+        try{
+            con=cn.conectar();
+            ps=con.prepareStatement(sql);
+            ps.setString(1, u.getNombre());
+            ps.setString(2, u.getUsuario());
+            ps.setString(3, u.getPassword());
+            ps.setString(4, u.getTipo());
+            int n=ps.executeUpdate();
+            if(n!=0){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            return false;
+        }
+    }
 }
