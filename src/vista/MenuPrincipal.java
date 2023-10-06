@@ -98,6 +98,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         listarEmpleado();
         listarNomina();
         listarPagos();
+        listarUsuarios();
         modeloDatos.addColumn("ID");
         modeloDatos.addColumn("Empresa");
         modeloDatos.addColumn("RUC");
@@ -174,6 +175,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
             modeloArea.addRow(ob);
         }
         tablaArea.setModel(modeloArea);
+    }
+    private void listarUsuarios(){
+        List<usuarios> lista=daoU.Listar();
+        modeloUsuario=(DefaultTableModel) usuarios.getModel();
+        Object[] ob=new Object[5];
+        for(int i=0;i<lista.size();i++){
+            ob[0]=lista.get(i).getIdUser();
+            ob[1]=lista.get(i).getNombre();
+            ob[2]=lista.get(i).getUsuario();
+            ob[3]=lista.get(i).getPassword();
+            ob[4]=lista.get(i).getTipo();
+            modeloUsuario.addRow(ob);
+        }
+        usuarios.setModel(modeloUsuario);
     }
     private void listarEmpleado(){
         try{
@@ -384,6 +399,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jScrollPane7 = new javax.swing.JScrollPane();
         usuarios = new javax.swing.JTable();
         txtpass = new javax.swing.JPasswordField();
+        btnEditarusuario = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -1826,7 +1842,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 "ID", "Nombre", "Usuario", "Password", "Tipo"
             }
         ));
+        usuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                usuariosMouseClicked(evt);
+            }
+        });
         jScrollPane7.setViewportView(usuarios);
+
+        btnEditarusuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editar (1).png"))); // NOI18N
+        btnEditarusuario.setText("Modificar");
+        btnEditarusuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarusuarioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pusuariosLayout = new javax.swing.GroupLayout(pusuarios);
         pusuarios.setLayout(pusuariosLayout);
@@ -1851,7 +1880,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
                             .addComponent(cbotipousuario, 0, 178, Short.MAX_VALUE)
                             .addComponent(txtpass))
                         .addGap(45, 45, 45)
-                        .addComponent(btnGuardarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnGuardarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEditarusuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -1866,7 +1897,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel45)
-                    .addComponent(txtnomusuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtnomusuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEditarusuario))
                 .addGap(18, 18, 18)
                 .addGroup(pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel46)
@@ -1881,7 +1913,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(cbotipousuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(132, Short.MAX_VALUE))
+                .addContainerGap(124, Short.MAX_VALUE))
         );
 
         panel.addTab("Usuarios", pusuarios);
@@ -2613,11 +2645,43 @@ public class MenuPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Usuario registrado con exito");
             limpiarDatosUsuario();
             limpiarTablaUsuario();
-            //listarUsuario();
+            listarUsuarios();
         }else{
             JOptionPane.showMessageDialog(null, "Error Al Registrar el Usuario");
         }
     }//GEN-LAST:event_btnGuardarUsuarioActionPerformed
+
+    private void usuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usuariosMouseClicked
+        // TODO add your handling code here:
+        int fila=usuarios.getSelectedRow();
+        txtidusuario.setText(usuarios.getValueAt(fila, 0).toString());
+        txtnomusuario.setText(usuarios.getValueAt(fila, 1).toString());
+        txtusuario.setText(usuarios.getValueAt(fila, 2).toString());
+        txtpass.setText(usuarios.getValueAt(fila, 3).toString());
+        cbotipousuario.setSelectedItem(usuarios.getValueAt(fila, 4).toString());
+    }//GEN-LAST:event_usuariosMouseClicked
+
+    private void btnEditarusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarusuarioActionPerformed
+        // TODO add your handling code here:
+        int fila=usuarios.getSelectedRow();
+        if(fila==-1){
+            JOptionPane.showMessageDialog(null, "Seleccione un Area");
+        }else{
+            usu.setIdUser(Integer.parseInt(txtidusuario.getText()));
+            usu.setNombre(txtnomusuario.getText());
+            usu.setUsuario(txtusuario.getText());
+            usu.setPassword(txtpass.getText());
+            usu.setTipo(cbotipousuario.getSelectedItem().toString());
+            if(daoU.editar(usu)){
+                JOptionPane.showMessageDialog(null, "se modifico con exito");
+                limpiarDatosUsuario();
+                limpiarTablaUsuario();
+                listarUsuarios();
+            }else{
+                JOptionPane.showMessageDialog(null, "Error al modificar");
+            }
+        }
+    }//GEN-LAST:event_btnEditarusuarioActionPerformed
     
     private byte[] getImagenEditar() {
         byte[] imagen =da.getImagen();
@@ -2812,6 +2876,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnEditarNomina;
     private javax.swing.JButton btnEditarPago;
     private javax.swing.JButton btnEditardatos;
+    private javax.swing.JButton btnEditarusuario;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnEliminarArea;
     private javax.swing.JButton btnEliminarEmpleado;
