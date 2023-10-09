@@ -400,6 +400,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         usuarios = new javax.swing.JTable();
         txtpass = new javax.swing.JPasswordField();
         btnEditarusuario = new javax.swing.JButton();
+        btnElimarUsuario = new javax.swing.JButton();
+        btnBuscarUsuario = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -1857,6 +1859,22 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnElimarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
+        btnElimarUsuario.setText("Eliminar");
+        btnElimarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnElimarUsuarioActionPerformed(evt);
+            }
+        });
+
+        btnBuscarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buscar.png"))); // NOI18N
+        btnBuscarUsuario.setText("Buscar");
+        btnBuscarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarUsuarioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pusuariosLayout = new javax.swing.GroupLayout(pusuarios);
         pusuarios.setLayout(pusuariosLayout);
         pusuariosLayout.setHorizontalGroup(
@@ -1883,6 +1901,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
                         .addGroup(pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnGuardarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnEditarusuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnElimarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnBuscarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -1893,12 +1915,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addGroup(pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel44)
                     .addComponent(txtidusuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGuardarUsuario))
+                    .addComponent(btnGuardarUsuario)
+                    .addComponent(btnElimarUsuario))
                 .addGap(12, 12, 12)
                 .addGroup(pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel45)
                     .addComponent(txtnomusuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEditarusuario))
+                    .addComponent(btnEditarusuario)
+                    .addComponent(btnBuscarUsuario))
                 .addGap(18, 18, 18)
                 .addGroup(pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel46)
@@ -2682,6 +2706,37 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnEditarusuarioActionPerformed
+
+    private void btnElimarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElimarUsuarioActionPerformed
+        // TODO add your handling code here:
+        if(!txtidusuario.getText().isEmpty()){
+            int confirmacion=JOptionPane.showConfirmDialog(rootPane, "¿Seguro de eliminar el usuario?","Confirmar",2);
+            if(confirmacion==0){
+                usu.setIdUser(Integer.parseInt(txtidusuario.getText()));
+                daoU.elimiar(usu);
+                limpiarDatosUsuario();
+                limpiarTablaUsuario();
+                listarUsuarios();
+            }
+        }
+    }//GEN-LAST:event_btnElimarUsuarioActionPerformed
+
+    private void btnBuscarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarUsuarioActionPerformed
+        // TODO add your handling code here:
+        usu.setIdUser(Integer.parseInt(txtidusuario.getText()));
+        if(daoU.Buscar(usu)){
+            txtnomusuario.setText(usu.getNombre());
+            txtusuario.setText(usu.getUsuario());
+            txtpass.setText(usu.getPassword());
+            cbotipousuario.setSelectedItem(usu.getTipo().toString());
+        }else{
+            JOptionPane.showMessageDialog(null, "El Usuario No Existe");
+            txtnomusuario.setText("");
+            txtusuario.setText("");
+            txtpass.setText("");
+            txtidusuario.setText("");
+        }
+    }//GEN-LAST:event_btnBuscarUsuarioActionPerformed
     
     private byte[] getImagenEditar() {
         byte[] imagen =da.getImagen();
@@ -2867,6 +2922,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscarEN;
     private javax.swing.JButton btnBuscarEmpleado;
     private javax.swing.JButton btnBuscarNomina;
+    private javax.swing.JButton btnBuscarUsuario;
     private javax.swing.JButton btnCalcular;
     private javax.swing.JButton btnCalcularPago;
     private javax.swing.JButton btnCargarImagen;
@@ -2877,6 +2933,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnEditarPago;
     private javax.swing.JButton btnEditardatos;
     private javax.swing.JButton btnEditarusuario;
+    private javax.swing.JButton btnElimarUsuario;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnEliminarArea;
     private javax.swing.JButton btnEliminarEmpleado;

@@ -99,4 +99,45 @@ public class DaoUsuarios {
             return false;
         }
    }
+    
+    public boolean elimiar(usuarios usu){
+       String sql="delete from usuarios where id_user=?";
+       try{
+            con=cn.conectar();
+            ps=con.prepareStatement(sql); 
+            ps.setInt(1, usu.getIdUser());
+            int n=ps.executeUpdate();
+            if(n!=0){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            return false;
+        }
+   }
+    
+    public boolean Buscar(usuarios usu){
+       String sql="SELECT * from usuarios where id_user=?";
+       try{
+            con=cn.conectar();
+            ps=con.prepareStatement(sql);
+            ps.setInt(1, usu.getIdUser());
+            rs=ps.executeQuery();
+            if(rs.next()){
+                usu.setIdUser(rs.getInt(1));
+                usu.setNombre(rs.getString(2));
+                usu.setUsuario(rs.getString(3));
+                usu.setPassword(rs.getString(4));
+                usu.setTipo(rs.getString(5));
+                return true;
+            }else{
+                 return false;
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            return false;
+        }
+   }
 }
