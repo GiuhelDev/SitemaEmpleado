@@ -234,6 +234,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnArea = new javax.swing.JButton();
         btnCargo = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
+        btnPnomina = new javax.swing.JButton();
+        btnPpagos = new javax.swing.JButton();
+        btnPdatos = new javax.swing.JButton();
+        btnPhome = new javax.swing.JButton();
         panel = new javax.swing.JTabbedPane();
         phome = new javax.swing.JPanel();
         pempleados = new javax.swing.JPanel();
@@ -446,6 +450,34 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnPnomina.setText("Nomina");
+        btnPnomina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPnominaActionPerformed(evt);
+            }
+        });
+
+        btnPpagos.setText("Pagos");
+        btnPpagos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPpagosActionPerformed(evt);
+            }
+        });
+
+        btnPdatos.setText("Datos");
+        btnPdatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPdatosActionPerformed(evt);
+            }
+        });
+
+        btnPhome.setText("Home");
+        btnPhome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPhomeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -457,7 +489,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(btnUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCargo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCerrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnCerrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnPnomina, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnPpagos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnPdatos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnPhome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(48, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -469,12 +505,22 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(btnEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
                 .addComponent(btnArea, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(12, 12, 12)
+                .addComponent(btnPnomina, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(btnPpagos, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnPdatos, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnPhome, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(177, 177, 177))
         );
+
+        panel.setEnabled(false);
 
         phome.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -1977,6 +2023,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
         // TODO add your handling code here:
+        Login m=new Login();
+        m.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCerrarActionPerformed
 
@@ -2737,6 +2785,26 @@ public class MenuPrincipal extends javax.swing.JFrame {
             txtidusuario.setText("");
         }
     }//GEN-LAST:event_btnBuscarUsuarioActionPerformed
+
+    private void btnPnominaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPnominaActionPerformed
+        // TODO add your handling code here:
+        panel.setSelectedComponent(Pnomina);
+    }//GEN-LAST:event_btnPnominaActionPerformed
+
+    private void btnPpagosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPpagosActionPerformed
+        // TODO add your handling code here:
+        panel.setSelectedComponent(Ppagos);
+    }//GEN-LAST:event_btnPpagosActionPerformed
+
+    private void btnPdatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPdatosActionPerformed
+        // TODO add your handling code here:
+         panel.setSelectedComponent(Pdatos);
+    }//GEN-LAST:event_btnPdatosActionPerformed
+
+    private void btnPhomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPhomeActionPerformed
+        // TODO add your handling code here:
+        panel.setSelectedComponent(phome);
+    }//GEN-LAST:event_btnPhomeActionPerformed
     
     private byte[] getImagenEditar() {
         byte[] imagen =da.getImagen();
@@ -2914,7 +2982,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel Pdatos;
     private javax.swing.JPanel Pnomina;
     private javax.swing.JPanel Ppagos;
-    private javax.swing.JButton btnArea;
+    public static javax.swing.JButton btnArea;
     private javax.swing.JButton btnBuscaArea;
     private javax.swing.JButton btnBuscaCarho;
     private javax.swing.JButton btnBuscar;
@@ -2926,7 +2994,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnCalcular;
     private javax.swing.JButton btnCalcularPago;
     private javax.swing.JButton btnCargarImagen;
-    private javax.swing.JButton btnCargo;
+    public static javax.swing.JButton btnCargo;
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEditarNomina;
@@ -2939,7 +3007,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminarEmpleado;
     private javax.swing.JButton btnEliminarNomina;
     private javax.swing.JButton btnEliminarPago;
-    private javax.swing.JButton btnEmpleados;
+    public static javax.swing.JButton btnEmpleados;
     private javax.swing.JButton btnEnviarArea;
     private javax.swing.JButton btnEnviarCargo;
     private javax.swing.JButton btnGenerarPDFPAGO;
@@ -2947,10 +3015,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnModificarArea;
     private javax.swing.JButton btnModificarEmpleado;
     private javax.swing.JButton btnNuevoPago;
+    public static javax.swing.JButton btnPdatos;
+    public static javax.swing.JButton btnPhome;
+    public static javax.swing.JButton btnPnomina;
+    public static javax.swing.JButton btnPpagos;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnRegistrarE;
     private javax.swing.JButton btnRegistrarNomina;
-    private javax.swing.JButton btnUsuarios;
+    public static javax.swing.JButton btnUsuarios;
     private javax.swing.JButton btnbuscarep;
     private javax.swing.JButton btnregistrarArea;
     private javax.swing.JButton btnregistrarPago;

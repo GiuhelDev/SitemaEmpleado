@@ -28,6 +28,7 @@ public class DaoUsuarios {
                 us.setNombre(rs.getString(2));
                 us.setUsuario(rs.getString(3));
                 us.setPassword(rs.getString(4));
+                us.setTipo(rs.getString(5));
             }
         }catch(Exception e){
             JOptionPane.showConfirmDialog(null, e);
