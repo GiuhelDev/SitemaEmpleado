@@ -199,7 +199,7 @@ public class Login extends javax.swing.JFrame {
             dispose();
             if(usu.getTipo().equals("Jefe")){
                 MenuPrincipal.btnPdatos.setEnabled(false);
-                 MenuPrincipal.btnUsuarios.setEnabled(false);
+                MenuPrincipal.btnUsuarios.setEnabled(false);
             }
         }else{
             JOptionPane.showMessageDialog(null, "Acceso Denegado");

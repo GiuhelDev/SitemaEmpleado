@@ -141,4 +141,22 @@ public class DaoUsuarios {
             return false;
         }
    }
+    public int CantUsuarios(){
+       String sql="SELECT COUNT(id_user)as cant from usuarios";
+       int cant = 0;
+       try{
+            con=cn.conectar();
+            ps=con.prepareStatement(sql);
+            rs=ps.executeQuery();
+            if(rs.next()){
+                cant=rs.getInt(1);
+                return cant;
+            }else{
+                 return 0;
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            return 0;
+        }
+   }   
 }

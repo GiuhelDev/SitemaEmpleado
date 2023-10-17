@@ -148,4 +148,22 @@ public class DaoPago {
             return false;
         }
    }
+    public int CantPagos(){
+       String sql="SELECT COUNT(id)as cant from pagos";
+       int cant = 0;
+       try{
+            con=cn.conectar();
+            ps=con.prepareStatement(sql);
+            rs=ps.executeQuery();
+            if(rs.next()){
+                cant=rs.getInt(1);
+                return cant;
+            }else{
+                 return 0;
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            return 0;
+        }
+   }   
 }

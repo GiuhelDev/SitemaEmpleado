@@ -109,4 +109,23 @@ public class DaoArea {
             return false;
         }
    }
+    
+     public int CantArea(){
+       String sql="SELECT COUNT(id_area)as cant from areas";
+       int cant = 0;
+       try{
+            con=cn.conectar();
+            ps=con.prepareStatement(sql);
+            rs=ps.executeQuery();
+            if(rs.next()){
+                cant=rs.getInt(1);
+                return cant;
+            }else{
+                 return 0;
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            return 0;
+        }
+   }
 }
