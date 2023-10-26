@@ -18,7 +18,7 @@ public class DaoUsuarios {
     
     public usuarios login(String user,String pass){
         usuarios us=new usuarios();
-        String sql="select * from usuarios where usuario='"+user+"' and password='"+pass+"'";
+        String sql="select * from usuarios where usuario='"+user+"' and pass=aes_encrypt('"+pass+"','clave')";
         try{
             con=cn.conectar();
             ps=con.prepareStatement(sql);
@@ -36,15 +36,12 @@ public class DaoUsuarios {
         return us;
     }
     
-    public boolean insertar(usuarios u){
-        String sql="insert into usuarios (nombre,usuario,password,tipo) values (?,?,?,?)";
+    public boolean insertar(String nombre,String user,String pas,String tipo){
+        String sql="INSERT into usuarios (nombre,usuario,pass,tipo) VALUES \n" +
+                "('"+nombre+"','"+user+"',aes_encrypt('"+pas+"','clave'),'"+tipo+"');";
         try{
             con=cn.conectar();
             ps=con.prepareStatement(sql);
-            ps.setString(1, u.getNombre());
-            ps.setString(2, u.getUsuario());
-            ps.setString(3, u.getPassword());
-            ps.setString(4, u.getTipo());
             int n=ps.executeUpdate();
             if(n!=0){
                 return true;
@@ -59,7 +56,7 @@ public class DaoUsuarios {
     
     public List Listar(){
         List<usuarios> lista=new ArrayList<>();
-        String sql="select * from usuarios";
+        String sql="select id_user,nombre,usuario,aes_decrypt(usuarios.pass,'clave')as pass,tipo from usuarios";
         try{
             con=cn.conectar();
             ps=con.prepareStatement(sql);
@@ -79,16 +76,12 @@ public class DaoUsuarios {
         return lista;
     }
     
-    public boolean editar(usuarios us){
-       String sql="update usuarios set nombre=?, usuario=?, password=?, tipo=? where id_user=?";
+    public boolean editar(int id,String nombre,String user,String pas,String tipo){
+       String sql="update usuarios set nombre='"+nombre+"',usuario='"+user+"',"
+               + "pass=aes_encrypt('"+pas+"','clave'), tipo='"+tipo+"' where id_user="+id;
        try{
             con=cn.conectar();
             ps=con.prepareStatement(sql);
-            ps.setString(1, us.getNombre());
-            ps.setString(2, us.getUsuario());
-            ps.setString(3, us.getPassword());
-            ps.setString(4, us.getTipo());
-            ps.setInt(5, us.getIdUser());
             int n=ps.executeUpdate();
             if(n!=0){
                 return true;
@@ -120,7 +113,7 @@ public class DaoUsuarios {
    }
     
     public boolean Buscar(usuarios usu){
-       String sql="SELECT * from usuarios where id_user=?";
+       String sql="SELECT id_user,nombre,usuario,aes_decrypt(usuarios.pass,'clave')as pass,tipo from usuarios where id_user=?";
        try{
             con=cn.conectar();
             ps=con.prepareStatement(sql);

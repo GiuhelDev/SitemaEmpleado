@@ -3085,7 +3085,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         usu.setUsuario(txtusuario.getText());
         usu.setPassword(txtpass.getText());
         usu.setTipo(cbotipousuario.getSelectedItem().toString());
-        if(daoU.insertar(usu)){
+        if(daoU.insertar(usu.getNombre(), usu.getUsuario(), usu.getPassword(), usu.getTipo())){
             JOptionPane.showMessageDialog(null, "Usuario registrado con exito");
             limpiarDatosUsuario();
             limpiarTablaUsuario();
@@ -3117,7 +3117,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             usu.setUsuario(txtusuario.getText());
             usu.setPassword(txtpass.getText());
             usu.setTipo(cbotipousuario.getSelectedItem().toString());
-            if(daoU.editar(usu)){
+            if(daoU.editar(usu.getIdUser(), usu.getNombre(), usu.getUsuario(), usu.getPassword(), usu.getTipo())){
                 JOptionPane.showMessageDialog(null, "se modifico con exito");
                 limpiarDatosUsuario();
                 limpiarTablaUsuario();
