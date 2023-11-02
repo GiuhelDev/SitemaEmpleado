@@ -3102,8 +3102,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         txtidusuario.setText(usuarios.getValueAt(fila, 0).toString());
         txtnomusuario.setText(usuarios.getValueAt(fila, 1).toString());
         txtusuario.setText(usuarios.getValueAt(fila, 2).toString());
-        txtpass.setText(usuarios.getValueAt(fila, 3).toString());
         cbotipousuario.setSelectedItem(usuarios.getValueAt(fila, 4).toString());
+        usu.setIdUser(Integer.parseInt(txtidusuario.getText()));
+        daoU.Buscar(usu);
+        txtpass.setText(usu.getPassword());
     }//GEN-LAST:event_usuariosMouseClicked
 
     private void btnEditarusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarusuarioActionPerformed

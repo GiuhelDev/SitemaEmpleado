@@ -56,7 +56,7 @@ public class DaoUsuarios {
     
     public List Listar(){
         List<usuarios> lista=new ArrayList<>();
-        String sql="select id_user,nombre,usuario,aes_decrypt(usuarios.pass,'clave')as pass,tipo from usuarios";
+        String sql="select id_user,nombre,usuario,pass,tipo from usuarios";
         try{
             con=cn.conectar();
             ps=con.prepareStatement(sql);
