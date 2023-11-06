@@ -4,6 +4,7 @@
  */
 package vista;
 import Dao.DaoArea;
+import Dao.DaoAsistencia;
 import Dao.DaoCargo;
 import Dao.DaoDatos;
 import Dao.DaoEmpleado;
@@ -38,6 +39,7 @@ import javax.swing.table.DefaultTableModel;
 import modelo.Datos;
 import modelo.RenderImagen;
 import modelo.areas;
+import modelo.asistencias;
 import modelo.cargo;
 import modelo.empleado;
 import modelo.nomina;
@@ -83,6 +85,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
     usuarios usu=new usuarios();
     DaoUsuarios daoU=new DaoUsuarios();
     DefaultTableModel modeloUsuario=new DefaultTableModel();
+    
+    asistencias asis=new asistencias();
+    DaoAsistencia daoAs=new DaoAsistencia();
+    DefaultTableModel modeloAsistencias=new DefaultTableModel();
     
     
     String Ruta = "";
@@ -286,6 +292,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnPpagos = new javax.swing.JButton();
         btnPdatos = new javax.swing.JButton();
         btnPhome = new javax.swing.JButton();
+        btnPhome1 = new javax.swing.JButton();
         panel = new javax.swing.JTabbedPane();
         phome = new javax.swing.JPanel();
         jLabel49 = new javax.swing.JLabel();
@@ -478,6 +485,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnEditarusuario = new javax.swing.JButton();
         btnElimarUsuario = new javax.swing.JButton();
         btnBuscarUsuario = new javax.swing.JButton();
+        Pasistencia = new javax.swing.JPanel();
+        jLabel55 = new javax.swing.JLabel();
+        jLabel57 = new javax.swing.JLabel();
+        jLabel58 = new javax.swing.JLabel();
+        jLabel59 = new javax.swing.JLabel();
+        txtidAsistencia = new javax.swing.JTextField();
+        txtidempleadoA = new javax.swing.JTextField();
+        txtnomempleadoA = new javax.swing.JTextField();
+        txttipoAsistencia = new javax.swing.JComboBox<>();
+        btnregistrarAsistencia = new javax.swing.JButton();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        asistencias = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -550,6 +569,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnPhome1.setText("Asistencia");
+        btnPhome1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPhome1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -565,7 +591,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(btnPnomina, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnPpagos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnPdatos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnPhome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnPhome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnPhome1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(48, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -587,9 +614,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(btnPdatos, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnPhome, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(2, 2, 2)
+                .addComponent(btnPhome1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(177, 177, 177))
+                .addGap(149, 149, 149))
         );
 
         panel.setEnabled(false);
@@ -2346,6 +2375,87 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         panel.addTab("Usuarios", pusuarios);
 
+        Pasistencia.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel55.setText("Id:");
+
+        jLabel57.setText("Id empelado:");
+
+        jLabel58.setText("Nombre Empleado:");
+
+        jLabel59.setText("Tipo:");
+
+        txttipoAsistencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Entrada", "Salida" }));
+
+        btnregistrarAsistencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/guardar.png"))); // NOI18N
+        btnregistrarAsistencia.setText("Registrar");
+        btnregistrarAsistencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnregistrarAsistenciaActionPerformed(evt);
+            }
+        });
+
+        asistencias.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane8.setViewportView(asistencias);
+
+        javax.swing.GroupLayout PasistenciaLayout = new javax.swing.GroupLayout(Pasistencia);
+        Pasistencia.setLayout(PasistenciaLayout);
+        PasistenciaLayout.setHorizontalGroup(
+            PasistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PasistenciaLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(PasistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 710, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(PasistenciaLayout.createSequentialGroup()
+                        .addGroup(PasistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel55)
+                            .addComponent(jLabel57)
+                            .addComponent(jLabel58)
+                            .addComponent(jLabel59))
+                        .addGap(37, 37, 37)
+                        .addGroup(PasistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtidAsistencia)
+                            .addComponent(txtidempleadoA)
+                            .addComponent(txtnomempleadoA)
+                            .addComponent(txttipoAsistencia, 0, 224, Short.MAX_VALUE))
+                        .addGap(42, 42, 42)
+                        .addComponent(btnregistrarAsistencia)))
+                .addContainerGap(34, Short.MAX_VALUE))
+        );
+        PasistenciaLayout.setVerticalGroup(
+            PasistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PasistenciaLayout.createSequentialGroup()
+                .addGap(54, 54, 54)
+                .addGroup(PasistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel55)
+                    .addComponent(txtidAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnregistrarAsistencia))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(PasistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel57)
+                    .addComponent(txtidempleadoA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(PasistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel58)
+                    .addComponent(txtnomempleadoA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(PasistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel59)
+                    .addComponent(txttipoAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(106, Short.MAX_VALUE))
+        );
+
+        panel.addTab("Asistencia", Pasistencia);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -3183,6 +3293,26 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         panel.setSelectedComponent(phome);
     }//GEN-LAST:event_btnPhomeActionPerformed
+
+    private void btnregistrarAsistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregistrarAsistenciaActionPerformed
+        // TODO add your handling code here:
+        asis.setIdempleado(Integer.parseInt(txtidempleadoA.getText()));
+        asis.setTipo(txttipoAsistencia.getSelectedItem().toString());
+        if(daoAs.insertar(asis)){
+            JOptionPane.showMessageDialog(null, "Asistencia registrado con exito");
+            //limpiarDatosArea();
+            //limpiarTablaArea();
+            //listarArea();
+            //cantAreas();
+        }else{
+            JOptionPane.showMessageDialog(null, "Error Al Registrar");
+        }
+    }//GEN-LAST:event_btnregistrarAsistenciaActionPerformed
+
+    private void btnPhome1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPhome1ActionPerformed
+        // TODO add your handling code here:
+         panel.setSelectedComponent(Pasistencia);
+    }//GEN-LAST:event_btnPhome1ActionPerformed
     
     private byte[] getImagenEditar() {
         byte[] imagen =da.getImagen();
@@ -3357,10 +3487,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Pasistencia;
     private javax.swing.JPanel Pdatos;
     private javax.swing.JPanel Pnomina;
     private javax.swing.JPanel Ppagos;
     private javax.swing.JLabel Usuarios;
+    private javax.swing.JTable asistencias;
     public static javax.swing.JButton btnArea;
     private javax.swing.JButton btnBuscaArea;
     private javax.swing.JButton btnBuscaCarho;
@@ -3396,6 +3528,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnNuevoPago;
     public static javax.swing.JButton btnPdatos;
     public static javax.swing.JButton btnPhome;
+    public static javax.swing.JButton btnPhome1;
     public static javax.swing.JButton btnPnomina;
     public static javax.swing.JButton btnPpagos;
     private javax.swing.JButton btnRegistrar;
@@ -3404,6 +3537,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     public static javax.swing.JButton btnUsuarios;
     private javax.swing.JButton btnbuscarep;
     private javax.swing.JButton btnregistrarArea;
+    private javax.swing.JButton btnregistrarAsistencia;
     private javax.swing.JButton btnregistrarPago;
     private javax.swing.JButton btnregistrarempleado;
     private javax.swing.JComboBox<String> cbotipodoc;
@@ -3461,7 +3595,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel54;
+    private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel56;
+    private javax.swing.JLabel jLabel57;
+    private javax.swing.JLabel jLabel58;
+    private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -3494,6 +3632,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JLabel lblImagen;
     private javax.swing.JTabbedPane panel;
     private javax.swing.JPanel parea;
@@ -3535,6 +3674,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField txtdocumentop;
     private javax.swing.JTextField txtempleadop;
     private javax.swing.JTextField txtempresa;
+    private javax.swing.JTextField txtidAsistencia;
     private javax.swing.JTextField txtidarea;
     private javax.swing.JTextField txtidareaempleado;
     private javax.swing.JTextField txtidcargo;
@@ -3542,6 +3682,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField txtidcargoempleado;
     private javax.swing.JTextField txtidcargop;
     private javax.swing.JTextField txtidempleado;
+    private javax.swing.JTextField txtidempleadoA;
     private javax.swing.JTextField txtidempleadoN;
     private javax.swing.JTextField txtidempleadop;
     private javax.swing.JTextField txtidnomina;
@@ -3549,6 +3690,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField txtidusuario;
     private javax.swing.JTextField txtnomEmpleadoN;
     private javax.swing.JTextField txtnomempleado;
+    private javax.swing.JTextField txtnomempleadoA;
     private javax.swing.JTextField txtnomusuario;
     private javax.swing.JPasswordField txtpass;
     private javax.swing.JTextField txtprecioCargo;
@@ -3556,6 +3698,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField txtruc;
     private javax.swing.JTextField txttelefono;
     private javax.swing.JTextField txttelefonoE;
+    private javax.swing.JComboBox<String> txttipoAsistencia;
     private javax.swing.JTextField txttotal;
     private javax.swing.JTextField txttotalPago;
     private javax.swing.JTextField txtusuario;
