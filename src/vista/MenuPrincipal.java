@@ -113,6 +113,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         cantNominasT();
         cantPagos();
         canUsuarios();
+        listarAsistencia();
         modeloDatos.addColumn("ID");
         modeloDatos.addColumn("Empresa");
         modeloDatos.addColumn("RUC");
@@ -249,6 +250,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
             DefaultTableModel modelo;
             modelo=daoE.listar();
             tablaempleado.setModel(modelo);
+        }catch(Exception e){
+            
+        }
+    }
+     private void listarAsistencia(){
+        try{
+            DefaultTableModel modelo;
+            modelo=daoAs.listar();
+            TablaAsistencias.setModel(modelo);
         }catch(Exception e){
             
         }
@@ -496,7 +506,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         txttipoAsistencia = new javax.swing.JComboBox<>();
         btnregistrarAsistencia = new javax.swing.JButton();
         jScrollPane8 = new javax.swing.JScrollPane();
-        asistencias = new javax.swing.JTable();
+        TablaAsistencias = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -2395,7 +2405,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        asistencias.setModel(new javax.swing.table.DefaultTableModel(
+        TablaAsistencias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -2403,7 +2413,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane8.setViewportView(asistencias);
+        jScrollPane8.setViewportView(TablaAsistencias);
 
         javax.swing.GroupLayout PasistenciaLayout = new javax.swing.GroupLayout(Pasistencia);
         Pasistencia.setLayout(PasistenciaLayout);
@@ -3299,11 +3309,24 @@ public class MenuPrincipal extends javax.swing.JFrame {
         asis.setIdempleado(Integer.parseInt(txtidempleadoA.getText()));
         asis.setTipo(txttipoAsistencia.getSelectedItem().toString());
         if(daoAs.insertar(asis)){
+            int idMax;
+            idMax=daoAs.obtenerMaxID();
+            String hora;
+            hora=daoAs.obtenerHora(idMax);
+            String estado;
+            String hora2="08:15:00";
+            if(hora.compareTo(hora2)<0){
+                estado="temprano";
+            }else{
+                estado="tarde";
+            }
+            asistencias as1=new asistencias();
+            as1.setEstado(estado);
+            as1.setId(idMax);
+            daoAs.editarEstado(as1);
             JOptionPane.showMessageDialog(null, "Asistencia registrado con exito");
-            //limpiarDatosArea();
-            //limpiarTablaArea();
-            //listarArea();
-            //cantAreas();
+            limpiarTablaAsistencia();
+            listarAsistencia();
         }else{
             JOptionPane.showMessageDialog(null, "Error Al Registrar");
         }
@@ -3373,6 +3396,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
      void limpiarTablaUsuario(){
         for(int i=0;i<modeloUsuario.getRowCount();i++){
             modeloUsuario.removeRow(i);
+            i=0-1;
+        }
+    }
+      void limpiarTablaAsistencia(){
+        for(int i=0;i<modeloAsistencias.getRowCount();i++){
+            modeloAsistencias.removeRow(i);
             i=0-1;
         }
     }
@@ -3491,8 +3520,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel Pdatos;
     private javax.swing.JPanel Pnomina;
     private javax.swing.JPanel Ppagos;
+    private javax.swing.JTable TablaAsistencias;
     private javax.swing.JLabel Usuarios;
-    private javax.swing.JTable asistencias;
     public static javax.swing.JButton btnArea;
     private javax.swing.JButton btnBuscaArea;
     private javax.swing.JButton btnBuscaCarho;

@@ -9,17 +9,29 @@ public class asistencias {
     int id;
     int idempleado;
     String hora;
+    String estado;
     String tipo;
 
     public asistencias() {
     }
 
-    public asistencias(int id, int idempleado, String hora, String tipo) {
+    public asistencias(int id, int idempleado, String hora, String estado, String tipo) {
         this.id = id;
         this.idempleado = idempleado;
         this.hora = hora;
+        this.estado = estado;
         this.tipo = tipo;
     }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    
 
     public int getId() {
         return id;

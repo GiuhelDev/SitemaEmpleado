@@ -44,7 +44,7 @@ public class DaoEmpleado {
     public DefaultTableModel listar(){
         DefaultTableModel modelo;
         
-        String [] titulos={"ID","Nombre","Apellido","Tipo Doc","Documento","Id Area","Area","ID Cargo","Cargo","Telefono","Correp"};
+        String [] titulos={"ID","Nombre","Apellido","Tipo Doc","Documento","Id Area","Area","ID Cargo","Cargo","Telefono","Correo"};
         
         String [] registros=new String[11];
         modelo=new DefaultTableModel(null,titulos);
