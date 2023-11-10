@@ -104,7 +104,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         listarEmpleado();
         listarNomina();
         listarPagos();
-        listarUsuarios();
+        //listarUsuarios();
+        listarUsuarios2();
         cantEmpleados();
         cantCarogs();
         cantAreas();
@@ -250,6 +251,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
             DefaultTableModel modelo;
             modelo=daoE.listar();
             tablaempleado.setModel(modelo);
+        }catch(Exception e){
+            
+        }
+    }
+   private void listarUsuarios2(){
+        try{
+            DefaultTableModel modelo;
+            modelo=daoU.listar();
+            usuarios.setModel(modelo);
         }catch(Exception e){
             
         }
@@ -2289,7 +2299,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Nombre", "Usuario", "Password", "Tipo"
+
             }
         ));
         usuarios.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3248,7 +3258,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Usuario registrado con exito");
             limpiarDatosUsuario();
             limpiarTablaUsuario();
-            listarUsuarios();
+            //listarUsuarios();
+            listarUsuarios2();
             canUsuarios();
         }else{
             JOptionPane.showMessageDialog(null, "Error Al Registrar el Usuario");
@@ -3259,12 +3270,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         int fila=usuarios.getSelectedRow();
         txtidusuario.setText(usuarios.getValueAt(fila, 0).toString());
-        txtnomusuario.setText(usuarios.getValueAt(fila, 1).toString());
-        txtusuario.setText(usuarios.getValueAt(fila, 2).toString());
-        cbotipousuario.setSelectedItem(usuarios.getValueAt(fila, 4).toString());
+        txtidempleadoU.setText(usuarios.getValueAt(fila, 1).toString());
+        txtnomusuario.setText(usuarios.getValueAt(fila, 2).toString());
+        txtdocEmpleadoU.setText(usuarios.getValueAt(fila, 3).toString());
+        cbotipousuario.setSelectedItem(usuarios.getValueAt(fila, 6).toString());
         usu.setIdUser(Integer.parseInt(txtidusuario.getText()));
         daoU.Buscar(usu);
         txtpass.setText(usu.getPassword());
+        txtusuario.setText(usu.getUsuario());
     }//GEN-LAST:event_usuariosMouseClicked
 
     private void btnEditarusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarusuarioActionPerformed
@@ -3282,8 +3295,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "se modifico con exito");
                 limpiarDatosUsuario();
                 limpiarTablaUsuario();
-                listarUsuarios();
-                
+                //listarUsuarios();
+                listarUsuarios2();
             }else{
                 JOptionPane.showMessageDialog(null, "Error al modificar");
             }
@@ -3299,7 +3312,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 daoU.elimiar(usu);
                 limpiarDatosUsuario();
                 limpiarTablaUsuario();
-                listarUsuarios();
+                //listarUsuarios();
+                listarUsuarios2();
                 canUsuarios();
             }
         }
@@ -3347,17 +3361,26 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         asis.setIdempleado(Integer.parseInt(txtidempleadoA.getText()));
         asis.setTipo(txttipoAsistencia.getSelectedItem().toString());
+        String estado;
         if(daoAs.insertar(asis)){
             int idMax;
             idMax=daoAs.obtenerMaxID();
             String hora;
             hora=daoAs.obtenerHora(idMax);
-            String estado;
-            String hora2="08:15:00";
-            if(hora.compareTo(hora2)<0){
-                estado="temprano";
+            String horaEntrada="08:15:00";
+            String horaSalida="17:00:00";
+            if(txttipoAsistencia.getSelectedItem().equals("Entrada")){
+                if(hora.compareTo(horaEntrada)<0){
+                    estado="temprano";
+                }else{
+                    estado="tarde";
+                }
             }else{
-                estado="tarde";
+                if(hora.compareTo(horaSalida)<0){
+                    estado="Normal";
+                }else{
+                    estado="tarde";
+                }
             }
             asistencias as1=new asistencias();
             as1.setEstado(estado);
@@ -3765,7 +3788,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField txtidcargoempleado;
     private javax.swing.JTextField txtidcargop;
     private javax.swing.JTextField txtidempleado;
-    private javax.swing.JTextField txtidempleadoA;
+    public static javax.swing.JTextField txtidempleadoA;
     private javax.swing.JTextField txtidempleadoN;
     private javax.swing.JTextField txtidempleadoU;
     private javax.swing.JTextField txtidempleadop;
@@ -3774,7 +3797,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField txtidusuario;
     private javax.swing.JTextField txtnomEmpleadoN;
     private javax.swing.JTextField txtnomempleado;
-    private javax.swing.JTextField txtnomempleadoA;
+    public static javax.swing.JTextField txtnomempleadoA;
     private javax.swing.JTextField txtnomusuario;
     private javax.swing.JPasswordField txtpass;
     private javax.swing.JTextField txtprecioCargo;

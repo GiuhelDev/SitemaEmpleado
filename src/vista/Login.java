@@ -4,15 +4,21 @@
  */
 package vista;
 
+
+import Dao.DaoEmpleado;
 import Dao.DaoUsuarios;
 import com.formdev.flatlaf.intellijthemes.FlatArcOrangeIJTheme;
 import javax.swing.JOptionPane;
+import modelo.empleado;
 import modelo.usuarios;
 
 public class Login extends javax.swing.JFrame {
     
     DaoUsuarios dao=new DaoUsuarios();
     usuarios usu=new usuarios();
+    
+    empleado em=new empleado();
+    DaoEmpleado daoE=new DaoEmpleado();
 
     /**
      * Creates new form Login
@@ -196,6 +202,10 @@ public class Login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Bienvenido");
             MenuPrincipal m=new MenuPrincipal();
             m.setVisible(true);
+            MenuPrincipal.txtidempleadoA.setText(usu.getIdempleado()+"");
+            em.setId(usu.getIdempleado());
+            daoE.Buscar(em);
+            MenuPrincipal.txtnomempleadoA.setText(em.getNombre()+" "+em.getApellido());
             dispose();
             if(usu.getTipo().equals("Jefe")){
                 MenuPrincipal.btnPdatos.setEnabled(false);

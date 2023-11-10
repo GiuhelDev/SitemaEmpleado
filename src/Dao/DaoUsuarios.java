@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import modelo.usuarios;
 
 public class DaoUsuarios {
@@ -74,6 +75,39 @@ public class DaoUsuarios {
             JOptionPane.showConfirmDialog(null, e);
         }
         return lista;
+    }
+    public DefaultTableModel listar(){
+        DefaultTableModel modelo;
+        
+        String [] titulos={"ID","ID_E","Nombre","Documento","Usuario","Password","Tipo"};
+        
+        String [] registros=new String[7];
+        modelo=new DefaultTableModel(null,titulos);
+        
+        String sql="SELECT u.id_user,u.idempleado,concat(e.nombre,' ',e.apellido)as nombre,\n" +
+                    "e.documento,u.usuario,u.pass,u.tipo from usuarios u\n" +
+                    "INNER JOIN empleados e\n" +
+                    "ON u.idempleado=e.id_empleado";
+        
+        try{
+            con=cn.conectar();
+            ps=con.prepareStatement(sql);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                registros[0]=rs.getString("id_user");
+                registros[1]=rs.getString("idempleado");
+                registros[2]=rs.getString("nombre");
+                registros[3]=rs.getString("documento");
+                registros[4]=rs.getString("usuario");
+                registros[5]=rs.getString("pass");
+                registros[6]=rs.getString("tipo");
+                modelo.addRow(registros);
+            }
+            return modelo;
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            return null;
+        }
     }
     
     public boolean editar(int id,int idempleado,String user,String pas,String tipo){
@@ -151,5 +185,6 @@ public class DaoUsuarios {
             JOptionPane.showConfirmDialog(null, e);
             return 0;
         }
-   }   
+   }
+    
 }
