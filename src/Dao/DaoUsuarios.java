@@ -25,7 +25,7 @@ public class DaoUsuarios {
             rs=ps.executeQuery();
             while(rs.next()){
                 us.setIdUser(rs.getInt(1));
-                us.setNombre(rs.getString(2));
+                us.setIdempleado(rs.getInt(2));
                 us.setUsuario(rs.getString(3));
                 us.setPassword(rs.getString(4));
                 us.setTipo(rs.getString(5));
@@ -36,9 +36,9 @@ public class DaoUsuarios {
         return us;
     }
     
-    public boolean insertar(String nombre,String user,String pas,String tipo){
-        String sql="INSERT into usuarios (nombre,usuario,pass,tipo) VALUES \n" +
-                "('"+nombre+"','"+user+"',aes_encrypt('"+pas+"','clave'),'"+tipo+"');";
+    public boolean insertar(int idempleado,String user,String pas,String tipo){
+        String sql="INSERT into usuarios (idempleado,usuario,pass,tipo) VALUES \n" +
+                "("+idempleado+",'"+user+"',aes_encrypt('"+pas+"','clave'),'"+tipo+"');";
         try{
             con=cn.conectar();
             ps=con.prepareStatement(sql);
@@ -56,7 +56,7 @@ public class DaoUsuarios {
     
     public List Listar(){
         List<usuarios> lista=new ArrayList<>();
-        String sql="select id_user,nombre,usuario,pass,tipo from usuarios";
+        String sql="select id_user,idempleado,usuario,pass,tipo from usuarios";
         try{
             con=cn.conectar();
             ps=con.prepareStatement(sql);
@@ -64,7 +64,7 @@ public class DaoUsuarios {
             while(rs.next()){
                 usuarios u=new usuarios();
                 u.setIdUser(rs.getInt(1));
-                u.setNombre(rs.getString(2));
+                u.setIdempleado(rs.getInt(2));
                 u.setUsuario(rs.getString(3));
                 u.setPassword(rs.getString(4));
                 u.setTipo(rs.getString(5));
@@ -76,8 +76,8 @@ public class DaoUsuarios {
         return lista;
     }
     
-    public boolean editar(int id,String nombre,String user,String pas,String tipo){
-       String sql="update usuarios set nombre='"+nombre+"',usuario='"+user+"',"
+    public boolean editar(int id,int idempleado,String user,String pas,String tipo){
+       String sql="update usuarios set idempleado="+idempleado+", usuario='"+user+"',"
                + "pass=aes_encrypt('"+pas+"','clave'), tipo='"+tipo+"' where id_user="+id;
        try{
             con=cn.conectar();
@@ -113,7 +113,7 @@ public class DaoUsuarios {
    }
     
     public boolean Buscar(usuarios usu){
-       String sql="SELECT id_user,nombre,usuario,aes_decrypt(usuarios.pass,'clave')as pass,tipo from usuarios where id_user=?";
+       String sql="SELECT id_user,idempleado,usuario,aes_decrypt(usuarios.pass,'clave')as pass,tipo from usuarios where id_user=?";
        try{
             con=cn.conectar();
             ps=con.prepareStatement(sql);
@@ -121,7 +121,7 @@ public class DaoUsuarios {
             rs=ps.executeQuery();
             if(rs.next()){
                 usu.setIdUser(rs.getInt(1));
-                usu.setNombre(rs.getString(2));
+                usu.setIdempleado(rs.getInt(2));
                 usu.setUsuario(rs.getString(3));
                 usu.setPassword(rs.getString(4));
                 usu.setTipo(rs.getString(5));

@@ -237,7 +237,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Object[] ob=new Object[5];
         for(int i=0;i<lista.size();i++){
             ob[0]=lista.get(i).getIdUser();
-            ob[1]=lista.get(i).getNombre();
+            ob[1]=lista.get(i).getIdempleado();
             ob[2]=lista.get(i).getUsuario();
             ob[3]=lista.get(i).getPassword();
             ob[4]=lista.get(i).getTipo();
@@ -495,6 +495,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnEditarusuario = new javax.swing.JButton();
         btnElimarUsuario = new javax.swing.JButton();
         btnBuscarUsuario = new javax.swing.JButton();
+        jLabel60 = new javax.swing.JLabel();
+        txtdocEmpleadoU = new javax.swing.JTextField();
+        btnBuscarEU = new javax.swing.JButton();
+        jLabel61 = new javax.swing.JLabel();
+        txtidempleadoU = new javax.swing.JTextField();
         Pasistencia = new javax.swing.JPanel();
         jLabel55 = new javax.swing.JLabel();
         jLabel57 = new javax.swing.JLabel();
@@ -2088,8 +2093,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         panel.addTab("Pagos", Ppagos);
@@ -2269,7 +2274,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jLabel48.setText("Tipo");
 
-        cbotipousuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Jefe" }));
+        cbotipousuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Jefe", "Empleado" }));
 
         btnGuardarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/guardar.png"))); // NOI18N
         btnGuardarUsuario.setText("Registrar");
@@ -2318,6 +2323,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jLabel60.setText("Doc_empleado");
+
+        btnBuscarEU.setText("...");
+        btnBuscarEU.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarEUActionPerformed(evt);
+            }
+        });
+
+        jLabel61.setText("Id empleado");
+
         javax.swing.GroupLayout pusuariosLayout = new javax.swing.GroupLayout(pusuarios);
         pusuarios.setLayout(pusuariosLayout);
         pusuariosLayout.setHorizontalGroup(
@@ -2325,31 +2341,44 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addGroup(pusuariosLayout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addGroup(pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 739, Short.MAX_VALUE)
+                    .addComponent(jLabel44)
+                    .addComponent(jLabel46)
+                    .addComponent(jLabel47)
+                    .addComponent(jLabel48))
+                .addGap(24, 24, 24)
+                .addGroup(pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtidusuario)
+                    .addComponent(txtusuario)
+                    .addComponent(cbotipousuario, 0, 178, Short.MAX_VALUE)
+                    .addComponent(txtpass))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pusuariosLayout.createSequentialGroup()
-                        .addGroup(pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel44)
+                        .addComponent(btnBuscarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnElimarUsuario))
+                    .addGroup(pusuariosLayout.createSequentialGroup()
+                        .addComponent(btnEditarusuario)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnGuardarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pusuariosLayout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addGroup(pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel60)
                             .addComponent(jLabel45)
-                            .addComponent(jLabel46)
-                            .addComponent(jLabel47)
-                            .addComponent(jLabel48))
-                        .addGap(24, 24, 24)
+                            .addComponent(jLabel61))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtnomusuario)
-                            .addComponent(txtidusuario)
-                            .addComponent(txtusuario)
-                            .addComponent(cbotipousuario, 0, 178, Short.MAX_VALUE)
-                            .addComponent(txtpass))
-                        .addGap(45, 45, 45)
-                        .addGroup(pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnGuardarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEditarusuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(txtnomusuario, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                            .addComponent(txtdocEmpleadoU)
+                            .addComponent(txtidempleadoU))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnElimarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnBuscarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(btnBuscarEU, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(94, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pusuariosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE)
+                .addGap(17, 17, 17))
         );
         pusuariosLayout.setVerticalGroup(
             pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2358,29 +2387,39 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addGroup(pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel44)
                     .addComponent(txtidusuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGuardarUsuario)
-                    .addComponent(btnElimarUsuario))
+                    .addComponent(btnElimarUsuario)
+                    .addComponent(btnBuscarUsuario))
                 .addGap(12, 12, 12)
                 .addGroup(pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel45)
-                    .addComponent(txtnomusuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEditarusuario)
-                    .addComponent(btnBuscarUsuario))
-                .addGap(18, 18, 18)
-                .addGroup(pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtusuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel46)
-                    .addComponent(txtusuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnGuardarUsuario))
+                .addGap(18, 18, 18)
+                .addGroup(pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pusuariosLayout.createSequentialGroup()
+                        .addGroup(pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel47)
+                            .addComponent(txtpass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pusuariosLayout.createSequentialGroup()
+                        .addGroup(pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel60)
+                            .addComponent(txtdocEmpleadoU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnBuscarEU))
+                        .addGap(18, 18, 18)))
+                .addGroup(pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbotipousuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel48)
+                    .addComponent(txtnomusuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel45))
                 .addGap(18, 18, 18)
                 .addGroup(pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel47)
-                    .addComponent(txtpass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pusuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel48)
-                    .addComponent(cbotipousuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabel61)
+                    .addComponent(txtidempleadoU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
 
         panel.addTab("Usuarios", pusuarios);
@@ -3201,11 +3240,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void btnGuardarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarUsuarioActionPerformed
         // TODO add your handling code here:
-        usu.setNombre(txtnomusuario.getText());
+        usu.setIdempleado(Integer.parseInt(txtidempleadoU.getText()));
         usu.setUsuario(txtusuario.getText());
         usu.setPassword(txtpass.getText());
         usu.setTipo(cbotipousuario.getSelectedItem().toString());
-        if(daoU.insertar(usu.getNombre(), usu.getUsuario(), usu.getPassword(), usu.getTipo())){
+        if(daoU.insertar(usu.getIdempleado(), usu.getUsuario(), usu.getPassword(), usu.getTipo())){
             JOptionPane.showMessageDialog(null, "Usuario registrado con exito");
             limpiarDatosUsuario();
             limpiarTablaUsuario();
@@ -3235,11 +3274,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Seleccione un Area");
         }else{
             usu.setIdUser(Integer.parseInt(txtidusuario.getText()));
-            usu.setNombre(txtnomusuario.getText());
+            usu.setIdempleado(Integer.parseInt(txtidempleadoU.getText()));
             usu.setUsuario(txtusuario.getText());
             usu.setPassword(txtpass.getText());
             usu.setTipo(cbotipousuario.getSelectedItem().toString());
-            if(daoU.editar(usu.getIdUser(), usu.getNombre(), usu.getUsuario(), usu.getPassword(), usu.getTipo())){
+            if(daoU.editar(usu.getIdUser(), usu.getIdempleado(), usu.getUsuario(), usu.getPassword(), usu.getTipo())){
                 JOptionPane.showMessageDialog(null, "se modifico con exito");
                 limpiarDatosUsuario();
                 limpiarTablaUsuario();
@@ -3270,7 +3309,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         usu.setIdUser(Integer.parseInt(txtidusuario.getText()));
         if(daoU.Buscar(usu)){
-            txtnomusuario.setText(usu.getNombre());
+            //txtnomusuario.setText(usu.getNombre());
             txtusuario.setText(usu.getUsuario());
             txtpass.setText(usu.getPassword());
             cbotipousuario.setSelectedItem(usu.getTipo().toString());
@@ -3336,6 +3375,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
          panel.setSelectedComponent(Pasistencia);
     }//GEN-LAST:event_btnPhome1ActionPerformed
+
+    private void btnBuscarEUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEUActionPerformed
+        // TODO add your handling code here:
+        em.setDoc(txtdocEmpleadoU.getText());
+        if(daoE.BuscarEmpleadoN(em)){
+            txtidempleadoU.setText(em.getId()+"");
+            txtnomusuario.setText(em.getNombre());
+        }else{
+            JOptionPane.showMessageDialog(null, "El Empleado No Existe");
+        }
+    }//GEN-LAST:event_btnBuscarEUActionPerformed
     
     private byte[] getImagenEditar() {
         byte[] imagen =da.getImagen();
@@ -3528,6 +3578,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnBuscarArea;
     private javax.swing.JButton btnBuscarEN;
+    private javax.swing.JButton btnBuscarEU;
     private javax.swing.JButton btnBuscarEmpleado;
     private javax.swing.JButton btnBuscarNomina;
     private javax.swing.JButton btnBuscarUsuario;
@@ -3630,6 +3681,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel60;
+    private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -3699,6 +3752,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField txtcorreoE;
     private javax.swing.JTextField txtdireccionE;
     private javax.swing.JTextField txtdoc;
+    private javax.swing.JTextField txtdocEmpleadoU;
     private javax.swing.JTextField txtdocemopleadoN;
     private javax.swing.JTextField txtdocumentop;
     private javax.swing.JTextField txtempleadop;
@@ -3713,6 +3767,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField txtidempleado;
     private javax.swing.JTextField txtidempleadoA;
     private javax.swing.JTextField txtidempleadoN;
+    private javax.swing.JTextField txtidempleadoU;
     private javax.swing.JTextField txtidempleadop;
     private javax.swing.JTextField txtidnomina;
     private javax.swing.JTextField txtidpago;

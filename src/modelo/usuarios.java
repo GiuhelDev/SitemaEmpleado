@@ -3,7 +3,7 @@ package modelo;
 public class usuarios {
     
     int idUser;
-    String nombre;
+    int idempleado;
     String usuario;
     String password;
     String tipo;
@@ -19,9 +19,9 @@ public class usuarios {
     public usuarios() {
     }
 
-    public usuarios(int idUser, String nombre, String usuario, String password, String tipo) {
+    public usuarios(int idUser, int idempleado, String usuario, String password, String tipo) {
         this.idUser = idUser;
-        this.nombre = nombre;
+        this.idempleado = idempleado;
         this.usuario = usuario;
         this.password = password;
         this.tipo = tipo;
@@ -37,13 +37,15 @@ public class usuarios {
         this.idUser = idUser;
     }
 
-    public String getNombre() {
-        return nombre;
+    public int getIdempleado() {
+        return idempleado;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setIdempleado(int idempleado) {
+        this.idempleado = idempleado;
     }
+
+   
 
     public String getUsuario() {
         return usuario;
