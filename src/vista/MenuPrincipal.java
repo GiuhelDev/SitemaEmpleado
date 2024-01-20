@@ -522,6 +522,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnregistrarAsistencia = new javax.swing.JButton();
         jScrollPane8 = new javax.swing.JScrollPane();
         TablaAsistencias = new javax.swing.JTable();
+        btnPDFAsistencia = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -2464,6 +2465,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
         ));
         jScrollPane8.setViewportView(TablaAsistencias);
 
+        btnPDFAsistencia.setText("PDF");
+        btnPDFAsistencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPDFAsistenciaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PasistenciaLayout = new javax.swing.GroupLayout(Pasistencia);
         Pasistencia.setLayout(PasistenciaLayout);
         PasistenciaLayout.setHorizontalGroup(
@@ -2485,7 +2493,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
                             .addComponent(txtnomempleadoA)
                             .addComponent(txttipoAsistencia, 0, 224, Short.MAX_VALUE))
                         .addGap(42, 42, 42)
-                        .addComponent(btnregistrarAsistencia)))
+                        .addGroup(PasistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnregistrarAsistencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnPDFAsistencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
         PasistenciaLayout.setVerticalGroup(
@@ -2499,7 +2509,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PasistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel57)
-                    .addComponent(txtidempleadoA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtidempleadoA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPDFAsistencia))
                 .addGap(18, 18, 18)
                 .addGroup(PasistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel58)
@@ -3029,6 +3040,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             GenerarPDFpagos(ide, f1, f2);
             limpiarTablaPago();
             listarPagos();
+            cantNominaPendientes();
             cantNominaPagadas();
             cantPagos();
         }else{
@@ -3117,6 +3129,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 limpiarDatosPago();
                 limpiarTablaPago();
                 listarPagos();
+                cantNominaPendientes();
             }else{
                 JOptionPane.showMessageDialog(null, "Error al modificar");
             }
@@ -3140,6 +3153,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 limpiarTablaPago();
                 listarPagos();
                 cantNominaPagadas();
+                cantNominaPendientes();
                 cantPagos();
         }else{
             JOptionPane.showMessageDialog(null, "Error editar de pendiente a pagado");
@@ -3409,6 +3423,25 @@ public class MenuPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "El Empleado No Existe");
         }
     }//GEN-LAST:event_btnBuscarEUActionPerformed
+
+    private void btnPDFAsistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPDFAsistenciaActionPerformed
+        // TODO add your handling code here:
+        Map p=new HashMap();
+        p.put("idEmpleado", Integer.parseInt(txtidempleadoA.getText()));
+        JasperReport report;
+        JasperPrint print;
+        
+        try{
+            report=JasperCompileManager.compileReport(new File("").getAbsolutePath()+
+                    "/src/reportes/reporteAsistencia.jrxml");
+            print =JasperFillManager.fillReport(report, p,conection);
+            JasperViewer view=new JasperViewer(print,false);
+            view.setTitle("Reporte de asistencia");
+            view.setVisible(true);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnPDFAsistenciaActionPerformed
     
     private byte[] getImagenEditar() {
         byte[] imagen =da.getImagen();
@@ -3629,6 +3662,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnModificarArea;
     private javax.swing.JButton btnModificarEmpleado;
     private javax.swing.JButton btnNuevoPago;
+    private javax.swing.JButton btnPDFAsistencia;
     public static javax.swing.JButton btnPdatos;
     public static javax.swing.JButton btnPhome;
     public static javax.swing.JButton btnPhome1;

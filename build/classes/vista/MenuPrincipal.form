@@ -3158,7 +3158,10 @@
                                       <Component id="txttipoAsistencia" pref="224" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                                  <Component id="btnregistrarAsistencia" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="btnregistrarAsistencia" max="32767" attributes="0"/>
+                                      <Component id="btnPDFAsistencia" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                           <EmptySpace pref="34" max="32767" attributes="0"/>
@@ -3178,6 +3181,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel57" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txtidempleadoA" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnPDFAsistencia" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -3269,6 +3273,14 @@
                     </Component>
                   </SubComponents>
                 </Container>
+                <Component class="javax.swing.JButton" name="btnPDFAsistencia">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="PDF"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPDFAsistenciaActionPerformed"/>
+                  </Events>
+                </Component>
               </SubComponents>
             </Container>
           </SubComponents>

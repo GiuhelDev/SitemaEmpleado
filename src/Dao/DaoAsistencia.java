@@ -44,7 +44,7 @@ public class DaoAsistencia {
         
         String sql="SELECT a.id,e.id_empleado,concat(e.nombre,' ',e.apellido)as empleado,a.fecha,a.Hora,a.estado,a.tipo FROM asistencia a\n" +
                     "INNER JOIN empleados e\n" +
-                    "on a.id_empleado=e.id_empleado";
+                    "on a.id_empleado=e.id_empleado order by a.id";
         
         try{
             con=cn.conectar();
